@@ -33,6 +33,7 @@ public class RobotUtils {
     public static double intake_power = 0;
 
 
+
      public RobotUtils(HardwareMap hardwareMap){
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
       slider2 = hardwareMap.get(DcMotor.class,"slider2");
@@ -58,6 +59,13 @@ public class RobotUtils {
         slider2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         slider1.setPower(power_slider1_down);
         slider2.setPower(power_slider2_down);
+    }
+
+    public void fullintake(){
+         intake.setPower(intake_power);
+        brat1.setPosition(brat_jos);
+        brat2.setPosition(brat_jos);
+        gheara.setPosition(gheara_deschisa);
     }
 
 }
