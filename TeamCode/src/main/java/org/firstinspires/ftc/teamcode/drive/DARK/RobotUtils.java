@@ -20,6 +20,18 @@ public class RobotUtils {
     public Servo brat2;
     public Servo gheara;
     public DcMotor intake;
+    public static double gheara_deschisa = 0.0;
+    public static double gheara_inchisa =0.0;
+    public static int slider_low =0;
+    public static int slider_down = 0; //deloc ridicat
+    public static double power_slider1_down = 1;
+    public static double power_slider2_down = -1;
+    public static int lansator_tragere = 0;
+    public static int lansator_lansare = 0;
+    public static int brat_sus = 0;
+    public static int brat_jos = 0;
+    public static double intake_power = 0;
+
 
      public RobotUtils(HardwareMap hardwareMap){
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
@@ -39,5 +51,13 @@ public class RobotUtils {
      }
 
 
+    public void goLow(){
+        slider1.setTargetPosition(slider_low);
+        slider2.setTargetPosition(slider_low);
+        slider1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slider2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slider1.setPower(power_slider1_down);
+        slider2.setPower(power_slider2_down);
+    }
 
 }
