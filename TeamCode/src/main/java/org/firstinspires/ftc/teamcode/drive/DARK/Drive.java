@@ -172,6 +172,10 @@ public class drive extends LinearOpMode {
            robot.intake.setPower(robot.intake_power);
        }
 
+       if(gamepad2.right_trigger){
+           robot.agatator.setPower(robot.putere_agatator);
+       }
+
        telemetry.addData("brat2", robot.brat2.getPosition());
          telemetry.addData("brat1", robot.brat1.getPosition());
             telemetry.addData("slider1 ", robot.slider1.getCurrentPosition());

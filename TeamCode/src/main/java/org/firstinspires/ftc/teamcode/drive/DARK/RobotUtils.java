@@ -20,6 +20,7 @@ public class RobotUtils {
     public Servo brat2;
     public Servo gheara;
     public DcMotor intake;
+    public DcMotor agatator;
     public static double gheara_deschisa = 0.0;
     public static double gheara_inchisa =0.0;
     public static int slider_low =0;
@@ -31,6 +32,7 @@ public class RobotUtils {
     public static int brat_sus = 0;
     public static int brat_jos = 0;
     public static double intake_power = 0;
+    public static int putere_agatator = 0;
 
 
 
@@ -42,6 +44,7 @@ public class RobotUtils {
       brat2 = hardwareMap.get(Servo.class, "brat2");
       gheara = hardwareMap.get(Servo.class, "gheara");
       intake = hardwareMap.get(DcMotor.class, "intake");
+      agatator = hardwareMap.get(DcMotor.class,"agatator");
 
       slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       slider1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -66,6 +69,13 @@ public class RobotUtils {
         brat1.setPosition(brat_jos);
         brat2.setPosition(brat_jos);
         gheara.setPosition(gheara_deschisa);
+    }
+
+    public void Gheara_deschisa(){
+      gheara.setPosition(gheara_deschisa);
+    }
+    public void Gheara_inchisa(){
+         gheara.setPosition(gheara_inchisa);
     }
 
 }
