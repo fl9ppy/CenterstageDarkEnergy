@@ -16,14 +16,14 @@ public class RobotUtils {
     public DcMotor slider1;
     public DcMotor slider2;
     public Servo lansator;
-    public ServoImplEx brat1;
+   public ServoImplEx brat1;
     public ServoImplEx brat2;
     public Servo gheara;
     public DcMotor intake;
     public DcMotor agatator;
     public Servo carlig;
-    public static double gheara_deschisa = 0.0;
-    public static double gheara_inchisa =0.0;
+    public static int gheara_deschisa = 1;
+    public static int gheara_inchisa = 0;
     public static int slider_low =0;
     public static int slider_down = 0; //deloc ridicat
     public static double power_slider1_down = 1;
@@ -32,7 +32,7 @@ public class RobotUtils {
     public static int lansator_lansare = 0;
     public static int brat_sus = 0;
     public static int brat_jos = 0;
-    public static double intake_power = 0;
+    public static double intake_power = 1;
     public static int putere_agatator = 0;
     public static int pozitie_carlig = 0;
 
@@ -42,7 +42,7 @@ public class RobotUtils {
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
       slider2 = hardwareMap.get(DcMotor.class,"slider2");
       lansator = hardwareMap.get(Servo.class, "lansator");
-      brat1 = hardwareMap.get(ServoImplEx.class, "brat1");
+     brat1 = hardwareMap.get(ServoImplEx.class, "brat1");
       brat2 = hardwareMap.get(ServoImplEx.class, "brat2");
       gheara = hardwareMap.get(Servo.class, "gheara");
       intake = hardwareMap.get(DcMotor.class, "intake");
@@ -74,11 +74,8 @@ public class RobotUtils {
         gheara.setPosition(gheara_deschisa);
     }
 
-    public void Gheara_deschisa(){
-      gheara.setPosition(gheara_deschisa);
-    }
-    public void Gheara_inchisa(){
-         gheara.setPosition(gheara_inchisa);
-    }
+    public void gheara_closed(){gheara.setPosition(gheara_inchisa);}
+
+    public void gheara_open(){gheara.setPosition(gheara_deschisa);}
 
 }

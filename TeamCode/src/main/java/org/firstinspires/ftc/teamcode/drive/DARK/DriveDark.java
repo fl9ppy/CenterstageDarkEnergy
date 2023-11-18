@@ -20,8 +20,8 @@ public class DriveDark extends LinearOpMode {
 
     enum Modedrive {
         DRIVER_CONTROL,
-        TURBO_CONTROL,
-        PRECISION_CONTROL
+        TURBO,
+        PRECISION
     }
 
     enum Mode2Slider {
@@ -45,71 +45,63 @@ public class DriveDark extends LinearOpMode {
         while (opModeIsActive() && !isStopRequested()) {
 
             switch (currentMode) {
+
                 case DRIVER_CONTROL:
                     drive.setWeightedDrivePower(
                             new Pose2d(
-                                    -gamepad1.left_stick_y/2.5,
-                                    -gamepad1.left_stick_x/2.5,
-                                    -gamepad1.right_stick_x/2.5
+                                    -gamepad1.left_stick_y / 1.7,
+                                    -gamepad1.left_stick_x / 1.7,
+                                    -gamepad1.right_stick_x / 1.7
                             )
                     );
 
-                    if (gamepad1.right_trigger>0.3) {
+                    if (gamepad1.right_trigger != 0) currentMode = currentMode.TURBO;
+                    if (gamepad1.left_trigger != 0) currentMode = currentMode.PRECISION;
 
-                        currentMode = Modedrive.TURBO_CONTROL;
-                    }
-                    if (gamepad1.left_trigger>0.3) {
-
-                        currentMode = Modedrive.PRECISION_CONTROL;
-                    }
                     break;
-                case TURBO_CONTROL:
 
+                case TURBO:
                     drive.setWeightedDrivePower(
                             new Pose2d(
-                                    -gamepad1.left_stick_y/1.5,
-                                    -gamepad1.left_stick_x/1.5,
-                                    -gamepad1.right_stick_x/1.5
+                                    -gamepad1.left_stick_y,
+                                    -gamepad1.left_stick_x,
+                                    -gamepad1.right_stick_x
                             )
                     );
 
-                    if (gamepad1.right_trigger==0) {
+                    if (gamepad1.right_trigger == 0) currentMode = currentMode.DRIVER_CONTROL;
 
-                        currentMode = Modedrive.DRIVER_CONTROL;
-                    }
                     break;
-                case PRECISION_CONTROL:
+
+                case PRECISION:
                     drive.setWeightedDrivePower(
                             new Pose2d(
-                                    -gamepad1.left_stick_y/4,
-                                    -gamepad1.left_stick_x/4,
-                                    -gamepad1.right_stick_x/4
+                                    -gamepad1.left_stick_y / 4,
+                                    -gamepad1.left_stick_x / 4,
+                                    -gamepad1.right_stick_x / 4
                             )
                     );
 
-                    if (gamepad1.left_trigger==0) {
+                    if (gamepad1.left_trigger == 0) currentMode = currentMode.DRIVER_CONTROL;
 
-                        currentMode = Modedrive.DRIVER_CONTROL;
-                    }
                     break;
-
             }
-            drive.update();
 
-            switch (sliderMode){
+
+            switch (sliderMode) {
                 case DOWN:
                     robot.goLow();
 
-                    if(gamepad1.dpad_left) sliderMode = sliderMode.IDLE;
-                    if(gamepad1.dpad_right) sliderMode = sliderMode.MANUAL;
+                    if (gamepad1.dpad_left) sliderMode = sliderMode.IDLE;
+                    if (gamepad1.dpad_right) sliderMode = sliderMode.MANUAL;
                     break;
 
                 case IDLE:
                     robot.slider1.setPower(0);
                     robot.slider2.setPower(0);
 
-                    if(gamepad1.dpad_down) sliderMode = sliderMode.DOWN;
-                    if(gamepad1.dpad_right) sliderMode = sliderMode.MANUAL;
+                    if (gamepad1.dpad_down) sliderMode = sliderMode.DOWN;
+                    if (gamepad1.dpad_right) sliderMode = sliderMode.MANUAL;
                     break;
 
 // TODO: case manual si faza cu encoderele;
@@ -143,38 +135,49 @@ public class DriveDark extends LinearOpMode {
 //                    }
             }
 
-       if(gamepad2.square){
-           robot.gheara.setPosition(robot.gheara_deschisa);}
+            if (gamepad2.square) {robot.gheara_open();}
 
-       if(gamepad2.x){
-           robot.gheara.setPosition(robot.gheara_inchisa);}
-       }
-
-       if(gamepad1.triangle) {
-           robot.lansator.setPosition(robot.lansator_lansare);
-       }
-
-       if(gamepad1.circle){
-           robot.lansator.setPosition(robot.lansator_tragere);
-       }
-
-       if(gamepad1.x){
-           robot.brat1.setPosition(robot.brat_sus);
-           robot.brat2.setPosition(robot.brat_sus);
-       }
-
-       if(gamepad1.square){
-           robot.brat1.setPosition(robot.brat_jos);
-           robot.brat2.setPosition(robot.brat_jos);
-       }
+            if (gamepad2.x) {robot.gheara_closed();}
 
 
+//       if(gamepad1.triangle) {
+//           robot.lansator.setPosition(robot.lansator_lansare);
+//       }
+//
+//       if(gamepad1.circle){
+//           robot.lansator.setPosition(robot.lansator_tragere);
+//       }
+            int press_count = 1;
 
-       telemetry.addData("brat2", robot.brat2.getPosition());
-         telemetry.addData("brat1", robot.brat1.getPosition());
+            if (gamepad1.right_bumper) press_count += 1;
+
+            if (press_count % 2 == 0) robot.intake.setPower(0.5);
+            else robot.intake.setPower(0);
+
+            int press_count2 = 1;
+
+            if (gamepad1.left_bumper) press_count2 += 1;
+
+            if (press_count2 % 2 == 0) robot.intake.setPower(-0.5);
+            else robot.intake.setPower(0);
+
+            if (gamepad1.x) {
+                robot.brat1.setPosition(robot.brat_sus);
+                robot.brat2.setPosition(robot.brat_sus);
+            }
+
+            if (gamepad1.square) {
+                robot.brat1.setPosition(robot.brat_jos);
+                robot.brat2.setPosition(robot.brat_jos);
+            }
+            drive.update();}
+
+
+            telemetry.addData("brat2", robot.brat2.getPosition());
+            telemetry.addData("brat1", robot.brat1.getPosition());
             telemetry.addData("slider1 ", robot.slider1.getCurrentPosition());
-        telemetry.addData("slider2", robot.slider2.getCurrentPosition());
-        telemetry.addData("gheara", robot.gheara.getPosition());
+            telemetry.addData("slider2", robot.slider2.getCurrentPosition());
+        telemetry.addData("slider2", robot.gheara.getPosition());
 
 
         telemetry.update();
