@@ -11,9 +11,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
-@TeleOp(name="Drive",group = "teleop")
+@TeleOp(name="DriveDark",group = "teleop")
 @Config
-public class drive extends LinearOpMode {
+public class DriveDark extends LinearOpMode {
 
     private RobotUtils robot;
 
@@ -168,13 +168,7 @@ public class drive extends LinearOpMode {
            robot.brat2.setPosition(robot.brat_jos);
        }
 
-       if(gamepad2.left_trigger){
-           robot.intake.setPower(robot.intake_power);
-       }
 
-       if(gamepad2.right_trigger){
-           robot.agatator.setPower(robot.putere_agatator);
-       }
 
        telemetry.addData("brat2", robot.brat2.getPosition());
          telemetry.addData("brat1", robot.brat1.getPosition());

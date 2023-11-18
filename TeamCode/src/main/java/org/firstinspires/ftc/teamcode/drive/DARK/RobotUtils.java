@@ -16,11 +16,12 @@ public class RobotUtils {
     public DcMotor slider1;
     public DcMotor slider2;
     public Servo lansator;
-    public Servo brat1;
-    public Servo brat2;
+    public ServoImplEx brat1;
+    public ServoImplEx brat2;
     public Servo gheara;
     public DcMotor intake;
     public DcMotor agatator;
+    public Servo carlig;
     public static double gheara_deschisa = 0.0;
     public static double gheara_inchisa =0.0;
     public static int slider_low =0;
@@ -33,6 +34,7 @@ public class RobotUtils {
     public static int brat_jos = 0;
     public static double intake_power = 0;
     public static int putere_agatator = 0;
+    public static int pozitie_carlig = 0;
 
 
 
@@ -40,11 +42,12 @@ public class RobotUtils {
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
       slider2 = hardwareMap.get(DcMotor.class,"slider2");
       lansator = hardwareMap.get(Servo.class, "lansator");
-      brat1 = hardwareMap.get(Servo.class, "brat1");
-      brat2 = hardwareMap.get(Servo.class, "brat2");
+      brat1 = hardwareMap.get(ServoImplEx.class, "brat1");
+      brat2 = hardwareMap.get(ServoImplEx.class, "brat2");
       gheara = hardwareMap.get(Servo.class, "gheara");
       intake = hardwareMap.get(DcMotor.class, "intake");
       agatator = hardwareMap.get(DcMotor.class,"agatator");
+      carlig = hardwareMap.get(Servo.class, "carlig");
 
       slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       slider1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
