@@ -24,7 +24,7 @@ public class RobotUtils {
     public Servo carlig;
     public static int gheara_deschisa = 1;
     public static int gheara_inchisa = 0;
-    public static int slider_low =0;
+    public static int slider_low =1188;
     public static int slider_down = 0; //deloc ridicat
     public static double power_slider1_down = 1;
     public static double power_slider2_down = -1;
@@ -67,6 +67,15 @@ public class RobotUtils {
         slider2.setPower(power_slider2_down);
     }
 
+    public void goDown(){
+         slider1.setTargetPosition(slider_down);
+         slider2.setTargetPosition(slider_down);
+         slider1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+         slider2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+         slider1.setPower(power_slider1_down);
+         slider2.setPower(power_slider2_down);
+    }
+
     public void fullintake(){
          intake.setPower(intake_power);
         brat1.setPosition(brat_jos);
@@ -77,5 +86,7 @@ public class RobotUtils {
     public void gheara_closed(){gheara.setPosition(gheara_inchisa);}
 
     public void gheara_open(){gheara.setPosition(gheara_deschisa);}
+
+
 
 }
