@@ -131,32 +131,12 @@ public class DriveDark extends LinearOpMode {
                 robot.brat2.setPosition(1);
             }
 
-//       if(gamepad1.triangle) {
-//           robot.lansator.setPosition(robot.lansator_lansare);
-//       }
-//
-//       if(gamepad1.circle){
-//           robot.lansator.setPosition(robot.lansator_tragere);
-//       }
-//            int press_count = 1;
-//
-//            if (gamepad2.right_bumper) press_count += 1;
-//
-//            if (press_count % 2 == 0) robot.intake.setPower(0.5);
-//            else robot.intake.setPower(0);
-//
-//            int press_count2 = 1;
-//
-//            if (gamepad2.left_bumper) press_count2 += 1;
-//
-//            if (press_count2 % 2 == 0) robot.intake.setPower(-0.5);
-//            else robot.intake.setPower(0);
-
             if(gamepad2.right_bumper)
                 robot.intake.setPower(-0.5);
 
             else if(gamepad2.left_bumper)
                 robot.intake.setPower(0.5);
+
             else robot.intake.setPower(0);
 
             if(gamepad2.right_stick_x != 0){
@@ -165,15 +145,15 @@ public class DriveDark extends LinearOpMode {
             }
 
 
-//            if (gamepad1.x) {
-//                robot.brat1.setPosition(robot.brat_sus);
-//                robot.brat2.setPosition(robot.brat_sus);
-//            }
-//
-//            if (gamepad1.square) {
-//                robot.brat1.setPosition(robot.brat_jos);
-//                robot.brat2.setPosition(robot.brat_jos);
-//            }
+            if (gamepad1.x) {
+                robot.brat1.setPosition(robot.brat_sus);
+                robot.brat2.setPosition(robot.brat_sus);
+            }
+
+            if (gamepad1.square) {
+                robot.brat1.setPosition(robot.brat_jos);
+                robot.brat2.setPosition(robot.brat_jos);
+            }
 
             telemetry.addData("brat2", robot.brat2.getPosition());
             telemetry.addData("brat1", robot.brat1.getPosition());
