@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -37,9 +38,8 @@ public class DriveDark extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-
-
         robot = new RobotUtils(hardwareMap);
+
         waitForStart();
 
         if (isStopRequested()) return;
@@ -89,57 +89,47 @@ public class DriveDark extends LinearOpMode {
                     break;
             }
 
+            robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            switch (sliderMode) {
-                case DOWN:
-                    robot.goLow();
+            if (gamepad2.right_trigger != 0) {
+                robot.slider1.setPower(0.75);
+                robot.slider2.setPower(-0.75);
+            }
+            else if (gamepad2.left_trigger != 0) {
+                robot.slider1.setPower(-0.75);
+                robot.slider2.setPower(0.75);
+            }
+            else {
+                robot.slider1.setPower(0);
+                robot.slider2.setPower(0);
 
-                    if (gamepad1.dpad_left) sliderMode = sliderMode.IDLE;
-                    if (gamepad1.dpad_right) sliderMode = sliderMode.MANUAL;
-                    break;
-
-                case IDLE:
-                    robot.slider1.setPower(0);
-                    robot.slider2.setPower(0);
-
-                    if (gamepad1.dpad_down) sliderMode = sliderMode.DOWN;
-                    if (gamepad1.dpad_left) sliderMode = sliderMode.MANUAL;
-                    break;
-
-                case MANUAL:
-                    robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                    robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-                    if (gamepad1.left_bumper) {
-                        robot.slider1.setPower(0.75);
-                        robot.slider2.setPower(-0.75);
-                    } else if (gamepad1.right_bumper) {
-                        robot.slider1.setPower(-0.75);
-                        robot.slider2.setPower(0.75);
-                    } else {
-                        robot.slider1.setPower(0);
-                        robot.slider2.setPower(0);
-
-                        if (gamepad1.dpad_right) {
-                            robot.goLow();
-                        } else if (gamepad1.dpad_down) {
-                            robot.goDown();
-                        }
+                if (gamepad2.dpad_down) {
+                    robot.slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                    robot.slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                    while(true) {
+                        robot.goDown();
+                        if(robot.slider1.getCurrentPosition()<robot.slider_down)
+                            break;
                     }
-
-                    if (gamepad1.triangle) {
-                        robot.slider1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                        robot.slider2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                        robot.slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                        robot.slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                        sliderMode = Mode2Slider.IDLE;
-                    }
-                    break;
+                }
             }
 
-            if (gamepad2.square) {robot.gheara_open();}
-            if (gamepad2.x) {robot.gheara_closed();}
+            //Flip la brat in modul manual dupa pozitie
+            if(robot.farEnough()) robot.bratUp();
+            else robot.bratDown();
 
+            if (gamepad2.a) {robot.gheara_open();}
+            if (gamepad1.x) {robot.gheara_closed();}
+
+            if(gamepad1.circle){
+                robot.brat1.setPosition(0);
+                robot.brat2.setPosition(0);
+            }
+            if(gamepad1.square){
+                robot.brat1.setPosition(1);
+                robot.brat2.setPosition(1);
+            }
 
 //       if(gamepad1.triangle) {
 //           robot.lansator.setPosition(robot.lansator_lansare);
@@ -150,38 +140,51 @@ public class DriveDark extends LinearOpMode {
 //       }
 //            int press_count = 1;
 //
-//            if (gamepad1.right_bumper) press_count += 1;
+//            if (gamepad2.right_bumper) press_count += 1;
 //
 //            if (press_count % 2 == 0) robot.intake.setPower(0.5);
 //            else robot.intake.setPower(0);
 //
 //            int press_count2 = 1;
 //
-//            if (gamepad1.left_bumper) press_count2 += 1;
+//            if (gamepad2.left_bumper) press_count2 += 1;
 //
 //            if (press_count2 % 2 == 0) robot.intake.setPower(-0.5);
 //            else robot.intake.setPower(0);
 
-            if (gamepad1.x) {
-                robot.brat1.setPosition(robot.brat_sus);
-                robot.brat2.setPosition(robot.brat_sus);
+            if(gamepad2.right_bumper)
+                robot.intake.setPower(-0.5);
+
+            else if(gamepad2.left_bumper)
+                robot.intake.setPower(0.5);
+            else robot.intake.setPower(0);
+
+            if(gamepad2.right_stick_x != 0){
+                robot.brat1.setPosition(gamepad2.right_stick_x);
+                robot.brat2.setPosition(gamepad2.right_stick_x);
             }
 
-            if (gamepad1.square) {
-                robot.brat1.setPosition(robot.brat_jos);
-                robot.brat2.setPosition(robot.brat_jos);
-            }
+
+//            if (gamepad1.x) {
+//                robot.brat1.setPosition(robot.brat_sus);
+//                robot.brat2.setPosition(robot.brat_sus);
+//            }
+//
+//            if (gamepad1.square) {
+//                robot.brat1.setPosition(robot.brat_jos);
+//                robot.brat2.setPosition(robot.brat_jos);
+//            }
 
             telemetry.addData("brat2", robot.brat2.getPosition());
             telemetry.addData("brat1", robot.brat1.getPosition());
-        telemetry.addData("mode", sliderMode.toString());
-        telemetry.addData("slider2", robot.gheara.getPosition());
-        telemetry.addData("slider1",robot.slider1.getCurrentPosition());
-        telemetry.addData("slider2",robot.slider2.getCurrentPosition());
+            telemetry.addData("mode", sliderMode.toString());
+            telemetry.addData("slider2", robot.gheara.getPosition());
+            telemetry.addData("slider1",robot.slider1.getCurrentPosition());
+            telemetry.addData("slider2",robot.slider2.getCurrentPosition());
 
 
-        telemetry.update();
-        drive.update();}
+            telemetry.update();
+            drive.update();}
     }
 }
 
