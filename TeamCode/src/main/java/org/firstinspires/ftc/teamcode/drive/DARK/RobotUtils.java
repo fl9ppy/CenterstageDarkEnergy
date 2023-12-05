@@ -25,8 +25,8 @@ public class RobotUtils {
     //public RevColorSensorV3 sensor_auto;
     public static int gheara_deschisa = 1;
     public static int gheara_inchisa = 0;
-    public static int slider_low =1188;
-    public static int slider_down = 15; //deloc ridicat
+    public static int slider_low =2413;
+    public static int slider_down = 2413; //deloc ridicat
     public static int lansator_tragere = 0;
     public static int lansator_lansare = 0;
     public static int brat_sus = 0;
@@ -44,12 +44,12 @@ public class RobotUtils {
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
       slider2 = hardwareMap.get(DcMotor.class,"slider2");
       //lansator = hardwareMap.get(Servo.class, "lansator");
-      brat1 = hardwareMap.get(ServoImplEx.class, "brat1");
-      brat2 = hardwareMap.get(ServoImplEx.class, "brat2");
-      gheara = hardwareMap.get(Servo.class, "gheara");
+//      brat1 = hardwareMap.get(ServoImplEx.class, "brat1");
+//      brat2 = hardwareMap.get(ServoImplEx.class, "brat2");
+//      gheara = hardwareMap.get(Servo.class, "gheara");
       intake = hardwareMap.get(DcMotor.class, "intake");
-      agatator = hardwareMap.get(DcMotor.class,"agatator");
-      carlig = hardwareMap.get(Servo.class, "carlig");
+//      agatator = hardwareMap.get(DcMotor.class,"agatator");
+//      carlig = hardwareMap.get(Servo.class, "carlig");
       //sensor_auto= hardwareMap.get(RevColorSensorV3.class, "sensor_auto");
 
       slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -57,10 +57,10 @@ public class RobotUtils {
       slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       slider2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
       slider1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-      slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+     slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-      brat2.setDirection(Servo.Direction.REVERSE);
+//      brat2.setDirection(Servo.Direction.REVERSE);
 
 //      brat1.setPwmRange(new PwmControl.PwmRange(505, 2495));
 //      brat2.setPwmRange(new PwmControl.PwmRange(505, 2495));
@@ -104,39 +104,33 @@ public class RobotUtils {
     //1500
     //1600
 
-
     public void goDown(){
         goSliderToPosition(slider_down, 0.6);
     }
 
 
     //Poate mai incepi sa adaugi ceva comentarii ca sa inteleg si eu ce ii pe aici??? xDDD
-    public void fullintake(){
-         intake.setPower(intake_power);
-         brat1.setPosition(brat_jos);
-         brat2.setPosition(brat_jos);
-         gheara.setPosition(gheara_deschisa);
-    }
+//    public void fullintake(){
+//         intake.setPower(intake_power);
+//         brat1.setPosition(brat_jos);
+//         brat2.setPosition(brat_jos);
+    //     gheara.setPosition(gheara_deschisa);
+//    }
 
     ///Aceste functii sunt beta si doar asa ca sa testam ideea cu flipul in functie de pozitie
-    public void bratUp(){
-        brat1.setPosition(brat_sus);
-        brat2.setPosition(brat_sus);
-    }
-
-    public void bratDown(){
-        brat1.setPosition(brat_jos);
-        brat2.setPosition(brat_jos);
-    }
+//    public void bratUp(){
+//        brat1.setPosition(brat_sus);
+//        brat2.setPosition(brat_sus);
+//    }
+//
+//    public void bratDown(){
+//        brat1.setPosition(brat_jos);
+//        brat2.setPosition(brat_jos);
+//    }
 
     boolean farEnough(){
          if(slider1.getCurrentPosition()>=safe_poz)
              return true;
          return false;
     }
-
-    public void gheara_closed(){gheara.setPosition(gheara_inchisa);}
-
-    public void gheara_open(){gheara.setPosition(gheara_deschisa);}
-
 }

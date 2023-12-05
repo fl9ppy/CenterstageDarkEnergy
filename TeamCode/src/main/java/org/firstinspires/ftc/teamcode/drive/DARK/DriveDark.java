@@ -114,51 +114,51 @@ public class DriveDark extends LinearOpMode {
                     }
                 }
             }
-
-            //Flip la brat in modul manual dupa pozitie
-            if(robot.farEnough()) robot.bratUp();
-            else robot.bratDown();
-
-            if (gamepad2.a) {robot.gheara_open();}
-            if (gamepad1.x) {robot.gheara_closed();}
-
-            if(gamepad1.circle){
-                robot.brat1.setPosition(0);
-                robot.brat2.setPosition(0);
-            }
-            if(gamepad1.square){
-                robot.brat1.setPosition(1);
-                robot.brat2.setPosition(1);
-            }
+//
+//            //Flip la brat in modul manual dupa pozitie
+//            if(robot.farEnough()) robot.bratUp();
+//            else robot.bratDown();
+//
+//            if (gamepad2.a) {robot.gheara_open();}
+//            if (gamepad1.x) {robot.gheara_closed();}
+//
+//            if(gamepad1.circle){
+//                robot.brat1.setPosition(0);
+//                robot.brat2.setPosition(0);
+//            }
+//            if(gamepad1.square){
+//                robot.brat1.setPosition(1);
+//                robot.brat2.setPosition(1);
+//            }
 
             if(gamepad2.right_bumper)
-                robot.intake.setPower(-0.5);
+                robot.intake.setPower(-0.7);
 
             else if(gamepad2.left_bumper)
-                robot.intake.setPower(0.5);
+                robot.intake.setPower(0.7);
 
             else robot.intake.setPower(0);
+//
+//            if(gamepad2.right_stick_x != 0){
+//                robot.brat1.setPosition(gamepad2.right_stick_x);
+//                robot.brat2.setPosition(gamepad2.right_stick_x);
+//            }
+//
+//
+//            if (gamepad1.x) {
+//                robot.brat1.setPosition(robot.brat_sus);
+//                robot.brat2.setPosition(robot.brat_sus);
+//            }
+//
+//            if (gamepad1.square) {
+//                robot.brat1.setPosition(robot.brat_jos);
+//                robot.brat2.setPosition(robot.brat_jos);
+//            }
 
-            if(gamepad2.right_stick_x != 0){
-                robot.brat1.setPosition(gamepad2.right_stick_x);
-                robot.brat2.setPosition(gamepad2.right_stick_x);
-            }
-
-
-            if (gamepad1.x) {
-                robot.brat1.setPosition(robot.brat_sus);
-                robot.brat2.setPosition(robot.brat_sus);
-            }
-
-            if (gamepad1.square) {
-                robot.brat1.setPosition(robot.brat_jos);
-                robot.brat2.setPosition(robot.brat_jos);
-            }
-
-            telemetry.addData("brat2", robot.brat2.getPosition());
-            telemetry.addData("brat1", robot.brat1.getPosition());
-            telemetry.addData("mode", sliderMode.toString());
-            telemetry.addData("slider2", robot.gheara.getPosition());
+//            telemetry.addData("brat2", robot.brat2.getPosition());
+//            telemetry.addData("brat1", robot.brat1.getPosition());
+             telemetry.addData("mode", sliderMode.toString());
+//            telemetry.addData("slider2", robot.gheara.getPosition());
             telemetry.addData("slider1",robot.slider1.getCurrentPosition());
             telemetry.addData("slider2",robot.slider2.getCurrentPosition());
 
