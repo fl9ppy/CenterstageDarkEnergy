@@ -1,3 +1,5 @@
 include ':FtcRobotController'
 include ':TeamCode'
 rootProject.name = "DarkEnergy CenterStage"
+include ':MeepMeep'
+include ':MeepMeepTesting'

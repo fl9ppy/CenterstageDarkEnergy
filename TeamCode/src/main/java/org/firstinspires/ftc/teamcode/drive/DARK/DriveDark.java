@@ -11,12 +11,16 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.drive.TwoWheelTrackingLocalizer;
 
 @TeleOp(name="DriveDark",group = "teleop")
 @Config
 public class DriveDark extends LinearOpMode {
 
     private RobotUtils robot;
+    private double looptime= 0;
+    public static double pos_servo_outake_inchis = 0.110;
+    public static double pos_servo_outake_deschis = 0.20;
 
 
     enum Modedrive {
@@ -24,14 +28,6 @@ public class DriveDark extends LinearOpMode {
         TURBO,
         PRECISION
     }
-
-    enum Mode2Slider {
-        DOWN,
-        IDLE,
-        MANUAL
-    }
-
-    Mode2Slider sliderMode = Mode2Slider.DOWN;
     Modedrive currentMode = Modedrive.DRIVER_CONTROL;
 
     public void runOpMode() throws InterruptedException {
@@ -89,108 +85,58 @@ public class DriveDark extends LinearOpMode {
                     break;
             }
 
-            robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-            if (gamepad2.right_trigger != 0) {
-                robot.slider1.setPower(0.75);
-                robot.slider2.setPower(-0.75);
-            }
-            else if (gamepad2.left_trigger != 0) {
-                robot.slider1.setPower(-0.75);
-                robot.slider2.setPower(0.75);
-            }
-            else {
-                robot.slider1.setPower(0);
-                robot.slider2.setPower(0);
-
-                if (gamepad2.dpad_down) {
-                    robot.slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                    robot.slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                    while(true) {
-                        robot.goDown();
-                        if(robot.slider1.getCurrentPosition()<robot.slider_down)
-                            break;
+            //Slidere
+                    if(gamepad2.right_trigger >= 0.3){
+                        robot.slider1.setPower(0.75);
+                        robot.slider2.setPower(-0.75);
+                    } else if(gamepad2.left_trigger >= 0.3){
+                        robot.slider1.setPower(-0.75);
+                        robot.slider2.setPower(0.75);
+                    } else{
+                        robot.slider1.setPower(0);
+                        robot.slider2.setPower(0);
                     }
-                }
-            }
-//
-//            //Flip la brat in modul manual dupa pozitie
-//            if(robot.farEnough()) robot.bratUp();
-//            else robot.bratDown();
-//
-//            if (gamepad2.a) {robot.gheara_open();}
-//            if (gamepad1.x) {robot.gheara_closed();}
-//
-//            if(gamepad1.circle){
-//                robot.brat1.setPosition(0);
-//                robot.brat2.setPosition(0);
-//            }
-//            if(gamepad1.square){
-//                robot.brat1.setPosition(1);
-//                robot.brat2.setPosition(1);
-//            }
+            //intake
+                    if (gamepad2.right_bumper)
+                        robot.intake.setPower(-0.85);
 
-            if(gamepad2.right_bumper)
-                robot.intake.setPower(-0.7);
+                    else if (gamepad2.left_bumper)
+                        robot.intake.setPower(0.85);
 
-            else if(gamepad2.left_bumper)
-                robot.intake.setPower(0.7);
-
-            else robot.intake.setPower(0);
-//
-//            if(gamepad2.right_stick_x != 0){
-//                robot.brat1.setPosition(gamepad2.right_stick_x);
-//                robot.brat2.setPosition(gamepad2.right_stick_x);
-//            }
-//
-//
-//            if (gamepad1.x) {
-//                robot.brat1.setPosition(robot.brat_sus);
-//                robot.brat2.setPosition(robot.brat_sus);
-//            }
-//
-//            if (gamepad1.square) {
-//                robot.brat1.setPosition(robot.brat_jos);
-//                robot.brat2.setPosition(robot.brat_jos);
-//            }
-
-//            telemetry.addData("brat2", robot.brat2.getPosition());
-//            telemetry.addData("brat1", robot.brat1.getPosition());
-             telemetry.addData("mode", sliderMode.toString());
-//            telemetry.addData("slider2", robot.gheara.getPosition());
-            telemetry.addData("slider1",robot.slider1.getCurrentPosition());
-            telemetry.addData("slider2",robot.slider2.getCurrentPosition());
+                    else robot.intake.setPower(0);
+            //brat
+                    if (gamepad2.circle)
+                        robot.bratDown();
+                    if (gamepad2.square)
+                        robot.bratUp();
+            //lansator
+                    if (gamepad2.cross)
+                        robot.ziuaimpingerii();
+                    if (gamepad2.triangle)
+                        robot.ziuatragerii();
+            //cuva
+                    if (gamepad1.right_bumper) robot.outake_front.setPosition(pos_servo_outake_deschis);
+                    if (gamepad1.left_bumper) robot.outake_front.setPosition(pos_servo_outake_inchis);
+            //pixeli detectati
+                  //  if(robot.hasDetected()) gamepad1.rumble(100);
 
 
-            telemetry.update();
-            drive.update();}
+                    telemetry.addData("brat2 ", robot.brat2.getPosition());
+                    telemetry.addData("brat1 ", robot.brat1.getPosition());
+                    telemetry.addData("lansator", robot.lansator.getPosition());
+                    telemetry.addData("slider1 ", robot.slider1.getCurrentPosition());
+                    telemetry.addData("slider2 ", robot.slider2.getCurrentPosition());
+                    telemetry.addData("outake_front ", robot.outake_front.getPosition());
+
+                    double loop = System.nanoTime();
+                    telemetry.addData("hz",1000000000/(loop-looptime));
+                    looptime = loop;
+
+                    telemetry.update();
+                    drive.update();
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-//**// Controale Armon
-//pozitile slidere : high pe sageata sus;
-//       mijloc left;
-//       down high;
-//       poz initiala cu cleste inapoim sageata down;
-//       lansare avion y(galben);
-//       cand ridici slider bratl de intoarce automat; a(verde)
-//        motor cab se ridica sus; x merge in jos;
-//
-//  Controale Lulu
-//          rotative rb
-//            gheara inchidere x; a dai drumul
-//           ridicare dpad up dpad down jos;
-//
-//
 
 
 
