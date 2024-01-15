@@ -89,6 +89,7 @@ public class DriveDark extends LinearOpMode {
                     break;
             }
 
+<<<<<<< Updated upstream
             robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -111,6 +112,18 @@ public class DriveDark extends LinearOpMode {
                         robot.goDown();
                         if(robot.slider1.getCurrentPosition()<robot.slider_down)
                             break;
+=======
+            //Slidere
+                    if(gamepad2.left_trigger >= 0.3){
+                        robot.slider1.setPower(0.75);
+                        robot.slider2.setPower(-0.75);
+                    } else if(gamepad2.right_trigger >= 0.3){
+                        robot.slider1.setPower(-0.75);
+                        robot.slider2.setPower(0.75);
+                    } else{
+                        robot.slider1.setPower(0);
+                        robot.slider2.setPower(0);
+>>>>>>> Stashed changes
                     }
                 }
             }
@@ -119,6 +132,7 @@ public class DriveDark extends LinearOpMode {
             if(robot.farEnough()) robot.bratUp();
             else robot.bratDown();
 
+<<<<<<< Updated upstream
             if (gamepad2.a) {robot.gheara_open();}
             if (gamepad1.x) {robot.gheara_closed();}
 
@@ -143,6 +157,24 @@ public class DriveDark extends LinearOpMode {
                 robot.brat1.setPosition(gamepad2.right_stick_x);
                 robot.brat2.setPosition(gamepad2.right_stick_x);
             }
+=======
+                    else robot.intake.setPower(0);
+            //brat
+                    if (gamepad2.square)
+                        robot.bratDown();
+                    if (gamepad2.circle)
+                        robot.bratUp();
+            //lansator
+                    if (gamepad2.cross)
+                        robot.ziuaimpingerii();
+                    if (gamepad2.triangle)
+                        robot.ziuatragerii();
+            //cuva
+                    if (gamepad1.right_bumper) robot.outake_front.setPosition(pos_servo_outake_deschis);
+                    if (gamepad1.left_bumper) robot.outake_front.setPosition(pos_servo_outake_inchis);
+            //pixeli detectati
+                  //  if(robot.hasDetected()) gamepad1.rumble(100);
+>>>>>>> Stashed changes
 
 
             if (gamepad1.x) {

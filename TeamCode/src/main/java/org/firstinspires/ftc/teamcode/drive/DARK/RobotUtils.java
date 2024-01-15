@@ -1,3 +1,21 @@
+/***
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⡷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠁⠀⢀⣴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⢀⣴⣷⣄⠀⠀⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠀⢴⣿⣿⣿⣿⣿⣏⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠈⠿⣿⣿⣿⣿⣷⣄⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀
+ ⠀⢀⣴⣧⣄⠀⠀⠀⠀⠙⢻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠉⠿⣿⣿⣿⣿⣷⣄⠀
+ ⢴⣿⣿⣿⣿⣶⣀⠀⠀⠀⠀⢘⣿⣿⣿⣿⣿⣿⣏⠀⠁⠀⠀⠉⠿⣿⣿⣿⣿⡷
+ ⠀⠙⠿⣿⣿⣿⣿⣶⣄⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠉⠻⡿⠋⠀
+ ⠀⠀⠀⠉⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠘⢻⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⢉⣿⣿⣿⣿⣿⡷⠀⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠉⢿⡿⠋⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+ ***/
+
 package org.firstinspires.ftc.teamcode.drive.DARK;
 
 import com.acmerobotics.dashboard.config.Config;
@@ -21,6 +39,7 @@ public class RobotUtils {
     public Servo gheara;
     public DcMotor intake;
     public DcMotor agatator;
+<<<<<<< Updated upstream
     public Servo carlig;
     //public RevColorSensorV3 sensor_auto;
     public static int gheara_deschisa = 1;
@@ -34,6 +53,19 @@ public class RobotUtils {
     public static double intake_power = 1;
     public static int putere_agatator = 0;
     public static int pozitie_carlig = 0;
+=======
+    public Servo outake_front;
+    public RevColorSensorV3 sensor_outake_back;
+    public RevColorSensorV3 sensor_outake_front;
+    public static double lansator_lansare = 0;
+    public static double lansator_tragere = 0.7;
+    public static double pos_servo_outake_inchis = 0.110;
+    public static double pos_servo_outake_deschis = 0.20;
+    public static double brat_sus = 0.37;
+    public static double brat_jos = 0;
+    public static int slidere_up = 0;
+    public static int slidere_down = 0;
+>>>>>>> Stashed changes
 
     //Trebuie aleasa cu robotu pornit, da mi-e prea lene sa il pornesc
     public static int safe_poz = 0;
@@ -139,4 +171,18 @@ public class RobotUtils {
 
     public void gheara_open(){gheara.setPosition(gheara_deschisa);}
 
+<<<<<<< Updated upstream
+=======
+    public void slider_up(){
+       slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+       slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+       goSliderToPosition(200, 0.7);
+    }
+
+    public void slider_down(){
+       slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+       slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        goSliderToPosition(10, 0.7);
+    }
+>>>>>>> Stashed changes
 }
