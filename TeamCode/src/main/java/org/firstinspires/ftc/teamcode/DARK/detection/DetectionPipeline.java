@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.DARK.detection;
+package org.firstinspires.ftc.teamcode.DARK.detection;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;

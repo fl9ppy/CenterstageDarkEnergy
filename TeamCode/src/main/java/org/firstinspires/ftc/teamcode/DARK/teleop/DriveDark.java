@@ -1,16 +1,13 @@
-package org.firstinspires.ftc.teamcode.drive.DARK;
+package org.firstinspires.ftc.teamcode.DARK.teleop;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.roadrunner.drive.Drive;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.DARK.utils.RobotUtils;
+import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 
 @TeleOp(name="DriveDark",group = "LULU_SI_ARMON")
 @Config
@@ -38,8 +35,12 @@ public class DriveDark extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) {
 
+            /*-------------------------P1-------------------------*/
+
+            //Chassis
             switch (currentMode) {
 
+                //Normal driving, most used, good for any scenario
                 case DRIVER_CONTROL:
                     drive.setWeightedDrivePower(
                             new Pose2d(
@@ -53,6 +54,7 @@ public class DriveDark extends LinearOpMode {
                     if (gamepad1.left_trigger != 0) currentMode = currentMode.PRECISION;
                     break;
 
+                //Very fast, used for optimizing cycle times, NOT RECOMMEDED IN HEAVY USE (BATERRY DRAIN)!!!  -R2 (ps4) / RB (xbox)
                 case TURBO:
                     drive.setWeightedDrivePower(
                             new Pose2d(
@@ -65,6 +67,7 @@ public class DriveDark extends LinearOpMode {
                     if (gamepad1.right_trigger == 0) currentMode = currentMode.DRIVER_CONTROL;
                     break;
 
+                //Very slow, rarely used, used for very small adjustments, GOOD TO USE!    -L2 (ps4) / LB (xbox)
                 case PRECISION:
                     drive.setWeightedDrivePower(
                             new Pose2d(
@@ -78,7 +81,15 @@ public class DriveDark extends LinearOpMode {
                     break;
             }
 
-            //Slidere
+            drive.update();
+
+            //outake
+            if(gamepad1.right_bumper) robot.outake_open();
+            if(gamepad1.left_bumper) robot.outake_close();
+
+            /*-------------------------P2-------------------------*/
+
+            //Sliders
             if(gamepad2.left_trigger >= 0.3) {
                 robot.slider1.setPower(0.75);
                 robot.slider2.setPower(-0.75);
@@ -95,7 +106,15 @@ public class DriveDark extends LinearOpMode {
             else if(gamepad2.left_bumper) robot.intake.setPower(-0.75);
             else robot.intake.setPower(0);
 
+            //Arm
+            if(gamepad2.square) robot.axonUp();
+            if(gamepad2.circle) robot.axonDown();
 
+            //Plane
+            if(gamepad2.triangle) robot.planeLaunch();
+            if(gamepad2.cross) robot.planeArmed();
+
+            //DS printings
             telemetry.addData("slider1: ", robot.slider1.getCurrentPosition());
             telemetry.addData("slider2: ", robot.slider2.getCurrentPosition());
             telemetry.addData("Mod sasiu: ", currentMode.toString());
@@ -105,7 +124,6 @@ public class DriveDark extends LinearOpMode {
             loopTime = loop;
 
             telemetry.update();
-            drive.update();
         }
     }
 }
