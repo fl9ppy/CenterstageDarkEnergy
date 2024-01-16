@@ -27,8 +27,8 @@ public class RobotUtils {
     public RevColorSensorV3 sensor1;
     public RevColorSensorV3 sensor2;
 
-    public static double outake_open = 1;
-    public static double outake_close = 0;
+    public static double outake_open = 0.6;
+    public static double outake_close = 0.2;
 
     public static double plane_launch_pos = 0;
     public static double plane_armed_pos = 0;
@@ -45,8 +45,8 @@ public class RobotUtils {
 
       plane = hardwareMap.get(Servo.class, "plane");
 
-      axon1 = hardwareMap.get(ServoImplEx.class, "brat1");
-      axon2 = hardwareMap.get(ServoImplEx.class, "brat2");
+      axon1 = hardwareMap.get(ServoImplEx.class, "axon1");
+      axon2 = hardwareMap.get(ServoImplEx.class, "axon2");
 
       outake = hardwareMap.get(Servo.class, "outake");
       intake = hardwareMap.get(DcMotor.class, "intake");
