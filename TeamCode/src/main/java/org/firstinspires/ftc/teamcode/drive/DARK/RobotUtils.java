@@ -33,56 +33,39 @@ public class RobotUtils {
 
     public DcMotor slider1;
     public DcMotor slider2;
-    public Servo lansator;
-   public Servo brat1;
-    public Servo brat2;
-    public Servo gheara;
+
+    public Servo plane;
+
+    public Servo axon1;
+    public Servo axon2;
+
+    public Servo outake;
     public DcMotor intake;
-    public DcMotor agatator;
-<<<<<<< Updated upstream
-    public Servo carlig;
-    //public RevColorSensorV3 sensor_auto;
-    public static int gheara_deschisa = 1;
-    public static int gheara_inchisa = 0;
-    public static int slider_low =1188;
-    public static int slider_down = 15; //deloc ridicat
-    public static int lansator_tragere = 0;
-    public static int lansator_lansare = 0;
-    public static int brat_sus = 0;
-    public static int brat_jos = 0;
-    public static double intake_power = 1;
-    public static int putere_agatator = 0;
-    public static int pozitie_carlig = 0;
-=======
-    public Servo outake_front;
-    public RevColorSensorV3 sensor_outake_back;
-    public RevColorSensorV3 sensor_outake_front;
-    public static double lansator_lansare = 0;
-    public static double lansator_tragere = 0.7;
-    public static double pos_servo_outake_inchis = 0.110;
-    public static double pos_servo_outake_deschis = 0.20;
-    public static double brat_sus = 0.37;
-    public static double brat_jos = 0;
-    public static int slidere_up = 0;
-    public static int slidere_down = 0;
->>>>>>> Stashed changes
 
-    //Trebuie aleasa cu robotu pornit, da mi-e prea lene sa il pornesc
-    public static int safe_poz = 0;
+    public static int outake_open = 1;
+    public static int outake_close = 0;
 
+    public static int plane_launch_pos = 0;
+    public static int plane_armed_pos = 0;
 
+    public static int axon_up_pos = 0;
+    public static int axon_down_pos = 0;
+
+    public static int slider_down = 0;
 
      public RobotUtils(HardwareMap hardwareMap){
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
       slider2 = hardwareMap.get(DcMotor.class,"slider2");
-      //lansator = hardwareMap.get(Servo.class, "lansator");
-      brat1 = hardwareMap.get(ServoImplEx.class, "brat1");
-      brat2 = hardwareMap.get(ServoImplEx.class, "brat2");
-      gheara = hardwareMap.get(Servo.class, "gheara");
+
+      plane = hardwareMap.get(Servo.class, "plane");
+
+      axon1 = hardwareMap.get(ServoImplEx.class, "brat1");
+      axon2 = hardwareMap.get(ServoImplEx.class, "brat2");
+
+      outake = hardwareMap.get(DcMotor.class, "outake");
       intake = hardwareMap.get(DcMotor.class, "intake");
-      agatator = hardwareMap.get(DcMotor.class,"agatator");
-      carlig = hardwareMap.get(Servo.class, "carlig");
-      //sensor_auto= hardwareMap.get(RevColorSensorV3.class, "sensor_auto");
+
+      sensor1 = hardwareMap.get(RevColorSensorV3.class, "sensor1");
 
       slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       slider1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -130,59 +113,24 @@ public class RobotUtils {
         }
         // If the current position is already at the target position, the sliders do not need to move.
     }
-    public void goLow(){
-        goSliderToPosition(slider_low, 0.6);
-    }
-    //1500
-    //1600
-
-
-    public void goDown(){
-        goSliderToPosition(slider_down, 0.6);
-    }
-
-
-    //Poate mai incepi sa adaugi ceva comentarii ca sa inteleg si eu ce ii pe aici??? xDDD
-    public void fullintake(){
-         intake.setPower(intake_power);
-         brat1.setPosition(brat_jos);
-         brat2.setPosition(brat_jos);
-         gheara.setPosition(gheara_deschisa);
-    }
-
-    ///Aceste functii sunt beta si doar asa ca sa testam ideea cu flipul in functie de pozitie
     public void bratUp(){
         brat1.setPosition(brat_sus);
         brat2.setPosition(brat_sus);
     }
-
     public void bratDown(){
         brat1.setPosition(brat_jos);
         brat2.setPosition(brat_jos);
     }
-
-    boolean farEnough(){
-         if(slider1.getCurrentPosition()>=safe_poz)
-             return true;
-         return false;
-    }
-
-    public void gheara_closed(){gheara.setPosition(gheara_inchisa);}
-
-    public void gheara_open(){gheara.setPosition(gheara_deschisa);}
-
-<<<<<<< Updated upstream
-=======
+    public void cuva_closed(){gheara.setPosition(gheara_inchisa);}
+    public void cuva_open(){gheara.setPosition(gheara_deschisa);}
     public void slider_up(){
        slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
        slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-       goSliderToPosition(200, 0.7);
+       goSliderToPosition(slider, 0.7);
     }
-
     public void slider_down(){
        slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
        slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         goSliderToPosition(10, 0.7);
     }
->>>>>>> Stashed changes
 }

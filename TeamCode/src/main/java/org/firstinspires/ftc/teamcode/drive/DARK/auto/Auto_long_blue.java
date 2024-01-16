@@ -15,7 +15,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="Auto_long_blue", group="AUTINOMOUSGOOD")
+@Autonomous(name="Auto_long_blue", group="AUTONOMOUSGOOD")
 @Config
 
 
@@ -132,7 +132,7 @@ public class Auto_long_blue extends LinearOpMode {
                     ,detectionPipeline.getZoneLuminosity(25));
 
 
-            if (zoneright<zonemid && zoneright<80 zone = ZoneType.RIGHT;
+            if (zoneright<zonemid && zoneright<80) zone = ZoneType.RIGHT;
             else if (zonemid < zoneright && zonemid<80)zone = ZoneType.CENTER;
             else zone = ZoneType.LEFT;
 
