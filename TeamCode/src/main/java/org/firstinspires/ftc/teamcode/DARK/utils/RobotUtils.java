@@ -96,11 +96,10 @@ public class RobotUtils {
         axon1.setPosition(axon_up_pos);
         axon2.setPosition(axon_up_pos);
     }
-    public void axonDown(){
+    public void axonDown() {
         axon1.setPosition(axon_down_pos);
         axon2.setPosition(axon_down_pos);
     }
-    
     public void planeLaunch() {plane.setPosition(plane_launch_pos);}
     public void planeArmed() {plane.setPosition(plane_armed_pos);}
     public void outake_open() {outake.setPosition(outake_open);}

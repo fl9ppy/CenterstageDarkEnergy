@@ -9,20 +9,16 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.DARK.utils.RobotUtils;
 import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-@TeleOp(name="DriveDark",group = "LULU_SI_ARMON")
+@TeleOp(name="DriveDark", group = "LULU_SI_ARMON")
 @Config
 public class DriveDark extends LinearOpMode {
-    private volatile boolean stopTelemetryThread = false;
     private RobotUtils robot;
     private double loopTime;
     private static final double  DRIVE_SCALE = 1.7;
     private static final double TURBO_SCALE = 1;
     private static final double PRECISION_SCALE = 4;
     private static final double SLIDER_POWER = 0.75;
+    private static final double INTAKE_POWER = 0.75;
     enum Modedrive {
         DRIVER_CONTROL,
         TURBO,
@@ -43,8 +39,6 @@ public class DriveDark extends LinearOpMode {
         waitForStart();
 
         if (isStopRequested()) return;
-
-        startTelemetryThread();
 
         while (opModeIsActive() && !isStopRequested()) {
 
@@ -77,9 +71,7 @@ public class DriveDark extends LinearOpMode {
             robot.slider2.setPower(gamepad2.left_trigger >= 0.3 ? -SLIDER_POWER : (gamepad2.right_trigger >= 0.3 ? SLIDER_POWER : 0));
 
             //Intake
-            if(gamepad2.right_bumper) robot.intake.setPower(0.75);
-            else if(gamepad2.left_bumper) robot.intake.setPower(-0.75);
-            else robot.intake.setPower(0);
+            robot.slider1.setPower(gamepad2.left_bumper ? INTAKE_POWER : (gamepad2.right_bumper ? -INTAKE_POWER : 0));
 
             //Arm
             if(gamepad2.square) robot.axonUp();
@@ -89,19 +81,8 @@ public class DriveDark extends LinearOpMode {
             if(gamepad2.triangle) robot.planeLaunch();
             if(gamepad2.cross) robot.planeArmed();
 
+            /*-------------------------TELEMETRY-------------------------*/
 
-        }
-        stopTelemetryThread();
-    }
-
-    private void startTelemetryThread() {
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleAtFixedRate(this::updateTelemetryTask, 0, 100, TimeUnit.MILLISECONDS);
-    }
-
-    private void updateTelemetryTask() {
-        while (!stopTelemetryThread) {
-            ///DS printings
             telemetry.addData("slider1: ", robot.slider1.getCurrentPosition());
             telemetry.addData("slider2: ", robot.slider2.getCurrentPosition());
             telemetry.addData("Mod sasiu: ", currentMode.toString());
@@ -111,13 +92,7 @@ public class DriveDark extends LinearOpMode {
             loopTime = loop;
 
             telemetry.update();
-
-            sleep(50);
         }
-    }
-
-    private void stopTelemetryThread() {
-        stopTelemetryThread = true;
     }
 }
 
