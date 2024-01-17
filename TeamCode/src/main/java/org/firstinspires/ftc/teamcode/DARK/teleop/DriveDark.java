@@ -17,8 +17,6 @@ public class DriveDark extends LinearOpMode {
     private static final double  DRIVE_SCALE = 1.7;
     private static final double TURBO_SCALE = 1;
     private static final double PRECISION_SCALE = 4;
-    private static final double SLIDER_POWER = 0.75;
-    private static final double INTAKE_POWER = 0.75;
     enum Modedrive {
         DRIVER_CONTROL,
         TURBO,
@@ -67,11 +65,21 @@ public class DriveDark extends LinearOpMode {
             /*-------------------------P2-------------------------*/
 
             //Sliders
-            robot.slider1.setPower(gamepad2.left_trigger >= 0.3 ? SLIDER_POWER : (gamepad2.right_trigger >= 0.3 ? -SLIDER_POWER : 0));
-            robot.slider2.setPower(gamepad2.left_trigger >= 0.3 ? -SLIDER_POWER : (gamepad2.right_trigger >= 0.3 ? SLIDER_POWER : 0));
+            if(gamepad2.right_trigger >= 0.3){
+                robot.slider1.setPower(0.75);
+                robot.slider2.setPower(-0.75);
+            } else if(gamepad2.left_trigger >= 0.3) {
+                robot.slider1.setPower(-0.75);
+                robot.slider2.setPower(0.75);
+            } else{
+                robot.slider1.setPower(0);
+                robot.slider2.setPower(0);
+            }
 
             //Intake
-            robot.slider1.setPower(gamepad2.left_bumper ? INTAKE_POWER : (gamepad2.right_bumper ? -INTAKE_POWER : 0));
+            if(gamepad2.right_bumper) robot.intake.setPower(0.75);
+            else if(gamepad2.left_bumper) robot.intake.setPower(-0.75);
+            else robot.intake.setPower(0);
 
             //Arm
             if(gamepad2.square) robot.axonUp();
