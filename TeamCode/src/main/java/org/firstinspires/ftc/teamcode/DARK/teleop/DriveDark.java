@@ -9,11 +9,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.DARK.utils.RobotUtils;
 import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 @TeleOp(name="DriveDark",group = "LULU_SI_ARMON")
 @Config
 public class DriveDark extends LinearOpMode {
+    private volatile boolean stopTelemetryThread = false;
     private RobotUtils robot;
     private double loopTime;
+    private static final double  DRIVE_SCALE = 1.7;
+    private static final double TURBO_SCALE = 1;
+    private static final double PRECISION_SCALE = 4;
     enum Modedrive {
         DRIVER_CONTROL,
         TURBO,
@@ -35,53 +43,25 @@ public class DriveDark extends LinearOpMode {
 
         if (isStopRequested()) return;
 
+        startTelemetryThread();
+
         while (opModeIsActive() && !isStopRequested()) {
 
             /*-------------------------P1-------------------------*/
 
             //Chassis
-            switch (currentMode) {
+            if(gamepad1.right_trigger != 0) currentMode = Modedrive.TURBO;
+            else if(gamepad1.left_trigger != 0) currentMode = Modedrive.PRECISION;
+            else currentMode = Modedrive.DRIVER_CONTROL;
 
-                //Normal driving, most used, good for any scenario
-                case DRIVER_CONTROL:
-                    drive.setWeightedDrivePower(
+            double driveScale = (currentMode == Modedrive.TURBO) ? TURBO_SCALE : (currentMode == Modedrive.PRECISION) ? PRECISION_SCALE : DRIVE_SCALE;
+            drive.setWeightedDrivePower(
                             new Pose2d(
-                                    -gamepad1.left_stick_y / 1.7,
-                                    -gamepad1.left_stick_x / 1.7,
-                                    -gamepad1.right_stick_x / 1.7
+                                    -gamepad1.left_stick_y / driveScale,
+                                    -gamepad1.left_stick_x / driveScale,
+                                    -gamepad1.right_stick_x / driveScale
                             )
                     );
-
-                    if (gamepad1.right_trigger != 0) currentMode = currentMode.TURBO;
-                    if (gamepad1.left_trigger != 0) currentMode = currentMode.PRECISION;
-                    break;
-
-                //Very fast, used for optimizing cycle times, NOT RECOMMEDED IN HEAVY USE (BATERRY DRAIN)!!!  -R2 (ps4) / RB (xbox)
-                case TURBO:
-                    drive.setWeightedDrivePower(
-                            new Pose2d(
-                                    -gamepad1.left_stick_y,
-                                    -gamepad1.left_stick_x,
-                                    -gamepad1.right_stick_x
-                            )
-                    );
-
-                    if (gamepad1.right_trigger == 0) currentMode = currentMode.DRIVER_CONTROL;
-                    break;
-
-                //Very slow, rarely used, used for very small adjustments, GOOD TO USE!    -L2 (ps4) / LB (xbox)
-                case PRECISION:
-                    drive.setWeightedDrivePower(
-                            new Pose2d(
-                                    -gamepad1.left_stick_y / 4,
-                                    -gamepad1.left_stick_x / 4,
-                                    -gamepad1.right_stick_x / 4
-                            )
-                    );
-
-                    if (gamepad1.left_trigger == 0) currentMode = currentMode.DRIVER_CONTROL;
-                    break;
-            }
 
             drive.update();
 
@@ -116,7 +96,19 @@ public class DriveDark extends LinearOpMode {
             if(gamepad2.triangle) robot.planeLaunch();
             if(gamepad2.cross) robot.planeArmed();
 
-            //DS printings
+
+        }
+        stopTelemetryThread();
+    }
+
+    private void startTelemetryThread() {
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleAtFixedRate(this::updateTelemetryTask, 0, 100, TimeUnit.MILLISECONDS);
+    }
+
+    private void updateTelemetryTask() {
+        while (!stopTelemetryThread) {
+            ///DS printings
             telemetry.addData("slider1: ", robot.slider1.getCurrentPosition());
             telemetry.addData("slider2: ", robot.slider2.getCurrentPosition());
             telemetry.addData("Mod sasiu: ", currentMode.toString());
@@ -126,7 +118,13 @@ public class DriveDark extends LinearOpMode {
             loopTime = loop;
 
             telemetry.update();
+
+            sleep(50);
         }
+    }
+
+    private void stopTelemetryThread() {
+        stopTelemetryThread = true;
     }
 }
 
