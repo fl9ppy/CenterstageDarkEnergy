@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+@Config
 
 public class RobotUtils {
     public DcMotor slider1;
@@ -26,6 +27,12 @@ public class RobotUtils {
 
     public RevColorSensorV3 sensor1;
     public RevColorSensorV3 sensor2;
+    public Servo intake_extension;
+    public Servo intake_wheel;
+    public static double wheel_back = 0;
+    public static double wheel_forward = 1;
+    public static double extension_up = 0;
+    public static double extension_down = 0;
 
     public static double outake_open = 0.6;
     public static double outake_close = 0.2;
@@ -53,6 +60,9 @@ public class RobotUtils {
 
       sensor1 = hardwareMap.get(RevColorSensorV3.class, "sensor1");
       sensor2 = hardwareMap.get(RevColorSensorV3.class, "sensor2");
+
+      intake_extension = hardwareMap.get(Servo.class, "intake_extension");
+      intake_wheel = hardwareMap.get(Servo.class, "intake_wheel");
 
       slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       slider1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -106,4 +116,6 @@ public class RobotUtils {
     public void outake_close() {outake.setPosition(outake_close);}
     public void slider_up() {goSliderToPosition(slider_up, 0.7);}
     public void slider_down() {goSliderToPosition(slider_down, 0.7);}
+    public void extension_up() {intake_extension.setPosition(extension_up);}
+    public void extension_down() {intake_extension.setPosition(extension_down);}
 }

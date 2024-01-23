@@ -34,6 +34,8 @@ public class DriveDark extends LinearOpMode {
         robot.slider1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        robot.extension_up();
+
         waitForStart();
 
         if (isStopRequested()) return;
