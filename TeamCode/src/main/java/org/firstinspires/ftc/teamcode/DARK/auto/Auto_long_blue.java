@@ -9,6 +9,8 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.DARK.detection.DetectionPipeline;
 import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.DARK.utils.RobotUtils;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -64,14 +66,38 @@ public class Auto_long_blue extends LinearOpMode {
 
         //Tranjectories
 
+        TrajectorySequence pixel1 = drive.trajectorySequenceBuilder(startPose)
+                .lineToSplineHeading(new Pose2d(-43, 15, Math.toRadians(0)))
+                .waitSeconds(0.1)
+                .build();
+
+        TrajectorySequence pedrum = drive.trajectorySequenceBuilder(pixel1.end())
+                .lineToLinearHeading(new Pose2d(-55, 7, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47, 7, Math.toRadians(0)))
+                .waitSeconds(0.1)
+                .build();
+
+        TrajectorySequence pixel2 = drive.trajectorySequenceBuilder(pedrum.end())
+                .lineToLinearHeading(new Pose2d(47,35, Math.toRadians(0)))
+                .waitSeconds(0.4)
+                .lineToLinearHeading(new Pose2d(54,35, Math.toRadians(0)))
+                .build();
+
+        TrajectorySequence parcare1 = drive.trajectorySequenceBuilder(pixel2.end())
+                .lineToLinearHeading(new Pose2d(47,35, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47, 7, Math.toRadians(0)))
+                .build();
+
+
+
 
         while (!isStarted() && !isStopRequested()) {
 
             double zoneright = detectionPipeline.getZoneLuminosity(85);
             double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(34)
-                                                        ,detectionPipeline.getZoneLuminosity(35))
-                                                        ,detectionPipeline.getZoneLuminosity(24))
-                                                        ,detectionPipeline.getZoneLuminosity(25));
+                                    ,detectionPipeline.getZoneLuminosity(35))
+                            ,detectionPipeline.getZoneLuminosity(24))
+                    ,detectionPipeline.getZoneLuminosity(25));
 
             if (zoneright<zonemid && zoneright<80) zone = ZoneType.RIGHT;
             else if (zonemid < zoneright && zonemid<80)zone = ZoneType.CENTER;
@@ -100,11 +126,29 @@ public class Auto_long_blue extends LinearOpMode {
         }
 
         switch(zoneFinal){
-            case LEFT:
+            case LEFT: drive.followTrajectorySequence(pixel1);
+                        sleep(200);
+                        drive.followTrajectorySequence(pedrum);
+                        sleep(200);
+                        drive.followTrajectorySequence(pixel2);
+                        sleep(200);
+                        drive.followTrajectorySequence(parcare1);
                 break;
-            case CENTER:
+            case CENTER: drive.followTrajectorySequence(pixel1);
+                sleep(200);
+                drive.followTrajectorySequence(pedrum);
+                sleep(200);
+                drive.followTrajectorySequence(pixel2);
+                sleep(200);
+                drive.followTrajectorySequence(parcare1);
                 break;
-            case RIGHT:
+            case RIGHT: drive.followTrajectorySequence(pixel1);
+                sleep(200);
+                drive.followTrajectorySequence(pedrum);
+                sleep(200);
+                drive.followTrajectorySequence(pixel2);
+                sleep(200);
+                drive.followTrajectorySequence(parcare1);
                 break;
         }
         if (!opModeIsActive()) return;
