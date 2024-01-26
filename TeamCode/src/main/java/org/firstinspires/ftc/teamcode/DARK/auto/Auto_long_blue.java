@@ -72,7 +72,7 @@ public class Auto_long_blue extends LinearOpMode {
                 .build();
 
         TrajectorySequence pedrum = drive.trajectorySequenceBuilder(pixel1.end())
-                .lineToLinearHeading(new Pose2d(-55, 7, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-57, 7, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(47, 7, Math.toRadians(0)))
                 .waitSeconds(0.1)
                 .build();
@@ -80,7 +80,7 @@ public class Auto_long_blue extends LinearOpMode {
         TrajectorySequence pixel2 = drive.trajectorySequenceBuilder(pedrum.end())
                 .lineToLinearHeading(new Pose2d(47,35, Math.toRadians(0)))
                 .waitSeconds(0.4)
-                .lineToLinearHeading(new Pose2d(54,35, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(52,35, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence parcare1 = drive.trajectorySequenceBuilder(pixel2.end())

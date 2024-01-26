@@ -34,7 +34,7 @@ public class RobotUtils {
     public static double extension_up = 0;
     public static double extension_down = 0;
 
-    public static double outake_open = 0.6;
+    public static double outake_open = 0.5;
     public static double outake_close = 0.2;
 
     public static double plane_launch_pos = 0;
