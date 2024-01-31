@@ -66,26 +66,87 @@ public class Auto_long_blue extends LinearOpMode {
 
         //Tranjectories
 
-        TrajectorySequence pixel1 = drive.trajectorySequenceBuilder(startPose)
-                .lineToSplineHeading(new Pose2d(-43, 15, Math.toRadians(0)))
-                .waitSeconds(0.1)
+//              ------------right----------
+        TrajectorySequence pixel1r = drive.trajectorySequenceBuilder(startPose)
+                .lineToLinearHeading(new Pose2d(-54,29, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-60,29, Math.toRadians(0)))
                 .build();
 
-        TrajectorySequence pedrum = drive.trajectorySequenceBuilder(pixel1.end())
-                .lineToLinearHeading(new Pose2d(-57, 7, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(47, 7, Math.toRadians(0)))
-                .waitSeconds(0.1)
+        TrajectorySequence pedrumr = drive.trajectorySequenceBuilder(pixel1r.end())
+                .lineToLinearHeading(new Pose2d(-61, 7, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45, 7, Math.toRadians(0)))
                 .build();
 
-        TrajectorySequence pixel2 = drive.trajectorySequenceBuilder(pedrum.end())
+        TrajectorySequence pixel2r = drive.trajectorySequenceBuilder(pedrumr.end())
+                .lineToLinearHeading(new Pose2d(45,29, Math.toRadians(0)))
+                .addTemporalMarker(0.2, ()->{robot.slider_up();})
+                .addTemporalMarker(0.3, ()->{robot.axonUp();})
+                .waitSeconds(0.5)
+                .lineToLinearHeading(new Pose2d(55,29, Math.toRadians(0)))
+                .waitSeconds(0.200)
+                .build();
+
+        TrajectorySequence parcarer = drive.trajectorySequenceBuilder(pixel2r.end())
+                .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
+                .lineToLinearHeading(new Pose2d(45,29, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47, 8, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(60,8, Math.toRadians(0)))
+                .build();
+
+
+//              ------------center----------
+        TrajectorySequence pixel1c = drive.trajectorySequenceBuilder(startPose)
+                .lineToLinearHeading(new Pose2d(-43, 29, Math.toRadians(0)))
+                .build();
+
+        TrajectorySequence pedrumc = drive.trajectorySequenceBuilder(pixel1c.end())
+                .lineToLinearHeading(new Pose2d(-50, 5, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47, 5, Math.toRadians(0)))
+                .build();
+
+        TrajectorySequence pixel2c = drive.trajectorySequenceBuilder(pedrumc.end())
                 .lineToLinearHeading(new Pose2d(47,35, Math.toRadians(0)))
-                .waitSeconds(0.4)
-                .lineToLinearHeading(new Pose2d(52,35, Math.toRadians(0)))
+                .addTemporalMarker(0.2, ()->{robot.slider_up();})
+                .addTemporalMarker(0.3, ()->{robot.axonUp();})
+                .waitSeconds(0.5)
+                .lineToLinearHeading(new Pose2d(53,35, Math.toRadians(0)))
+                .waitSeconds(0.200)
                 .build();
 
-        TrajectorySequence parcare1 = drive.trajectorySequenceBuilder(pixel2.end())
+        TrajectorySequence parcarec = drive.trajectorySequenceBuilder(pixel2c.end())
+                .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
                 .lineToLinearHeading(new Pose2d(47,35, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(47, 7, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47, 6, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(60,6, Math.toRadians(0)))
+                .build();
+
+
+//              ------------left----------
+        TrajectorySequence pixel1l = drive.trajectorySequenceBuilder(startPose)
+                .lineToLinearHeading(new Pose2d(-40,30, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(-26, 30, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-40,30, Math.toRadians(0)))
+                .build();
+
+        TrajectorySequence pedruml = drive.trajectorySequenceBuilder(pixel1l.end())
+                .lineToLinearHeading(new Pose2d(-47, 8, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47, 8, Math.toRadians(0)))
+                .build();
+
+        TrajectorySequence pixel2l = drive.trajectorySequenceBuilder(pedruml.end())
+                .lineToLinearHeading(new Pose2d(47,41, Math.toRadians(0)))
+                .addTemporalMarker(0.2, ()->{robot.slider_up();})
+                .addTemporalMarker(0.3, ()->{robot.axonUp();})
+                .waitSeconds(0.5)
+                .lineToLinearHeading(new Pose2d(55,41, Math.toRadians(0)))
+                .waitSeconds(0.200)
+                .build();
+
+        TrajectorySequence parcarel = drive.trajectorySequenceBuilder(pixel2l.end())
+                .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
+                .lineToLinearHeading(new Pose2d(47,41, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47, 6, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(60,6, Math.toRadians(0)))
                 .build();
 
 
@@ -126,29 +187,36 @@ public class Auto_long_blue extends LinearOpMode {
         }
 
         switch(zoneFinal){
-            case LEFT: drive.followTrajectorySequence(pixel1);
+            case LEFT:
+                drive.followTrajectorySequence(pixel1l);
                         sleep(200);
-                        drive.followTrajectorySequence(pedrum);
+                        drive.followTrajectorySequence(pedruml);
                         sleep(200);
-                        drive.followTrajectorySequence(pixel2);
+                        drive.followTrajectorySequence(pixel2l);
                         sleep(200);
-                        drive.followTrajectorySequence(parcare1);
+                        robot.outake_open();
+                        sleep(500);
+                        drive.followTrajectorySequence(parcarel);
                 break;
-            case CENTER: drive.followTrajectorySequence(pixel1);
+            case CENTER: drive.followTrajectorySequence(pixel1c);
                 sleep(200);
-                drive.followTrajectorySequence(pedrum);
+                drive.followTrajectorySequence(pedrumc);
                 sleep(200);
-                drive.followTrajectorySequence(pixel2);
+                drive.followTrajectorySequence(pixel2c);
                 sleep(200);
-                drive.followTrajectorySequence(parcare1);
+                robot.outake_open();
+                sleep(500);
+                drive.followTrajectorySequence(parcarec);
                 break;
-            case RIGHT: drive.followTrajectorySequence(pixel1);
+            case RIGHT: drive.followTrajectorySequence(pixel1r);
                 sleep(200);
-                drive.followTrajectorySequence(pedrum);
+                drive.followTrajectorySequence(pedrumr);
                 sleep(200);
-                drive.followTrajectorySequence(pixel2);
+                drive.followTrajectorySequence(pixel2r);
                 sleep(200);
-                drive.followTrajectorySequence(parcare1);
+                robot.outake_open();
+                sleep(500);
+                drive.followTrajectorySequence(parcarer);
                 break;
         }
         if (!opModeIsActive()) return;

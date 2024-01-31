@@ -67,10 +67,10 @@ public class DriveDark extends LinearOpMode {
             /*-------------------------P2-------------------------*/
 
             //Sliders
-            if(gamepad2.left_trigger >= 0.3){
+            if(gamepad2.right_trigger >= 0.3){
                 robot.slider1.setPower(0.75);
                 robot.slider2.setPower(-0.75);
-            } else if(gamepad2.right_trigger >= 0.3) {
+            } else if(gamepad2.left_trigger >= 0.3) {
                 robot.slider1.setPower(-0.75);
                 robot.slider2.setPower(0.75);
             } else{
