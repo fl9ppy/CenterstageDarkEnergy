@@ -12,17 +12,19 @@ public class MeepMeepTesting {
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(90), 15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-35, 60, Math.toRadians(-90)))
-                                .lineToLinearHeading(new Pose2d(-43, 23, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(-56, 5, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(47, 5, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(47,35, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(54,35, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(47,33, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(47, 6, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(58,6, Math.toRadians(0)))
+                        drive.trajectorySequenceBuilder(new Pose2d(-36, -60, Math.toRadians(90)))
+                                .lineToLinearHeading(new Pose2d(-38,-29, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(-29,-26, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(-35,-9, Math.toRadians(180)))
+                                .turn(Math.toRadians(-180))
+                                .lineToLinearHeading(new Pose2d(47, -9, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(47,-41, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(55,-41, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(47,-41, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(47, -8, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(60,-8, Math.toRadians(0)))
                                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)

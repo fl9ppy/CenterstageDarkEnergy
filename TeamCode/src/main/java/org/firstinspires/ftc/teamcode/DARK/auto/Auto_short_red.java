@@ -15,11 +15,11 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="Auto_long_red", group="AUTONOMOUSGOOD")
+@Autonomous(name="Auto_short_red", group="AUTONOMOUSGOOD")
 @Config
 
 
-public class Auto_long_red extends LinearOpMode {
+public class Auto_short_red extends LinearOpMode {
     private RobotUtils robot;
     OpenCvCamera webcam;
     DetectionPipeline detectionPipeline;
@@ -61,91 +61,90 @@ public class Auto_long_red extends LinearOpMode {
             }
         });
 
-        Pose2d startPose = new Pose2d(-35, -60, Math.toRadians(90));
+        Pose2d startPose = new Pose2d(10, -60, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
 
-        //Tranjectories
+        //Tranjectories miawwwwwwwwww
 
 //              ------------right----------
         TrajectorySequence pixel1r = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))
-                .lineToSplineHeading(new Pose2d(-30, -28, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))                .build();
+                .lineToLinearHeading(new Pose2d(10, -36, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(22,-36, Math.toRadians(90)))
+                .build();
 
         TrajectorySequence pedrumr = drive.trajectorySequenceBuilder(pixel1r.end())
-                .lineToLinearHeading(new Pose2d(-47, -8, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(47, -8, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(25,-49, Math.toRadians(90)))
+                .turn(Math.toRadians(-90))
                 .build();
 
         TrajectorySequence pixel2r = drive.trajectorySequenceBuilder(pedrumr.end())
-                .lineToLinearHeading(new Pose2d(47,-39, Math.toRadians(0)))
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
                 .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(55,-39, Math.toRadians(0)))
-                .waitSeconds(0.200)
+                .lineToLinearHeading(new Pose2d(52,-38, Math.toRadians(0)))                .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarer = drive.trajectorySequenceBuilder(pixel2r.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(47,-41, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(47, -7, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(59,-7, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,-38, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,-57, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(57,-57, Math.toRadians(0)))
                 .build();
+
 
 //              ------------center----------
         TrajectorySequence pixel1c = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-42, -16, Math.toRadians(0)))                .build();
+                .lineToLinearHeading(new Pose2d(10, -27, Math.toRadians(90)))
+                .build();
 
         TrajectorySequence pedrumc = drive.trajectorySequenceBuilder(pixel1c.end())
-                .lineToLinearHeading(new Pose2d(-56, -15, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-56,-8,Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(47, -8, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(10,-38, Math.toRadians(90)))
+                .turn(Math.toRadians(-90))
                 .build();
 
         TrajectorySequence pixel2c = drive.trajectorySequenceBuilder(pedrumc.end())
-                .lineToLinearHeading(new Pose2d(47,-27, Math.toRadians(0)))                .addTemporalMarker(0.2, ()->{robot.slider_up();})
+                .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
                 .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(54,-27, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(51,-33, Math.toRadians(0)))
                 .waitSeconds(0.200)
+
+                
                 .build();
 
         TrajectorySequence parcarec = drive.trajectorySequenceBuilder(pixel2c.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(47,-33, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(47, -6, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(58,-6, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,-36, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,-55, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(57,-55, Math.toRadians(0)))
                 .build();
 
 
 //              ------------left----------
         TrajectorySequence pixel1l = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-38,-29, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(-31,-26, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(13, -33, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(5,-33,Math.toRadians(180)))
                 .build();
 
         TrajectorySequence pedruml = drive.trajectorySequenceBuilder(pixel1l.end())
-                .lineToLinearHeading(new Pose2d(-35,-7, Math.toRadians(180)))
-                .turn(Math.toRadians(-180))
-                .lineToLinearHeading(new Pose2d(47, -7, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(15, -33, Math.toRadians(180)))
+                .turn(Math.toRadians(180))
                 .build();
 
         TrajectorySequence pixel2l = drive.trajectorySequenceBuilder(pedruml.end())
-                .lineToLinearHeading(new Pose2d(47,-41, Math.toRadians(0)))
-                .addTemporalMarker(0.2, ()->{robot.slider_up();})
-                .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .waitSeconds(0.300)
-                .lineToLinearHeading(new Pose2d(57,-39, Math.toRadians(0)))
-                .waitSeconds(0.200)
+                .addTemporalMarker(0.3, ()->{robot.slider_up();})
+                .addTemporalMarker(0.4, ()->{robot.axonUp();})
+                .waitSeconds(0.5)
+                .lineToLinearHeading(new Pose2d(54,-22, Math.toRadians(0)))                .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarel = drive.trajectorySequenceBuilder(pixel2l.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(47,-41, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(47, -8, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(60,-8, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,-29, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,-57, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(56,-57, Math.toRadians(0)))
                 .build();
+
 
 
 
@@ -157,8 +156,8 @@ public class Auto_long_red extends LinearOpMode {
                             ,detectionPipeline.getZoneLuminosity(24))
                     ,detectionPipeline.getZoneLuminosity(25));
 
-            if (zoneright<zonemid && zoneright<141) zone = ZoneType.RIGHT;
-            else if (zonemid < zoneright && zonemid<130)zone = ZoneType.CENTER;
+            if (zoneright<zonemid && zoneright<135) zone = ZoneType.RIGHT;
+            else if (zonemid < zoneright && zonemid<100)zone = ZoneType.CENTER;
             else zone = ZoneType.LEFT;
 
             telemetry.addData("zone = ",zone.toString());
@@ -190,7 +189,7 @@ public class Auto_long_red extends LinearOpMode {
                 drive.followTrajectorySequence(pedruml);
                 sleep(200);
                 drive.followTrajectorySequence(pixel2l);
-                sleep(400);
+                sleep(200);
                 robot.outake_open();
                 sleep(500);
                 drive.followTrajectorySequence(parcarel);
@@ -219,3 +218,5 @@ public class Auto_long_red extends LinearOpMode {
         if (!opModeIsActive()) return;
     }
 }
+
+

@@ -37,14 +37,14 @@ public class RobotUtils {
     public static double outake_close = 0.5;
     public static double outake_open = 0.2;
 
-    public static double plane_launch_pos = 0;
+    public static double plane_launch_pos = 0.7;
     public static double plane_armed_pos = 0;
 
     public static double axon_up_pos = 0.36;
     public static double axon_down_pos = 0;
 
-    public static int slider_up1 = -785;
-    public static int slider_up2= 785;
+    public static int slider_up1 = -725;
+    public static int slider_up2= 725;
     public static int slider_down1 = 14;
     public static int slider_down2 = -14;
     public static double slider_power = 0.75;
