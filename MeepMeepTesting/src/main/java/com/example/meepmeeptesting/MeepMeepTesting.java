@@ -14,19 +14,35 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(90), 15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-36, -60, Math.toRadians(90)))
-                                .lineToLinearHeading(new Pose2d(-38,-29, Math.toRadians(180)))
-                                .lineToLinearHeading(new Pose2d(-34,-26, Math.toRadians(180)))
-                                .lineToLinearHeading(new Pose2d(-35,-7, Math.toRadians(180)))
-                                .turn(Math.toRadians(-180))
-                                .lineToLinearHeading(new Pose2d(47, -7, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(47,-41, Math.toRadians(0)))
-                                .waitSeconds(0.300)
-                                .lineToLinearHeading(new Pose2d(57,-39, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(47,-41, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(47, -8, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(60,-8, Math.toRadians(0)))
+                        drive.trajectorySequenceBuilder(new Pose2d(-36, 60, Math.toRadians(-90)))
+                                //preload
+                                .lineToLinearHeading(new Pose2d(-40,30, Math.toRadians(0)))
+                                .lineToSplineHeading(new Pose2d(-31, 30, Math.toRadians(0)))
+                                //pedrum
+                                .lineToLinearHeading(new Pose2d(-40,30, Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(-56,10,Math.toRadians(0)), Math.toRadians(-90))
+                                .lineToSplineHeading(new Pose2d(38,10, Math.toRadians(0)))
+                                //pixel1
+                                .splineToSplineHeading(new Pose2d(50,47, Math.toRadians(0)), Math.toRadians(90))
+                                .lineToLinearHeading(new Pose2d(45,45, Math.toRadians(0)))
+                                //ciclu1
+                                //e micuta, e geloasa, tabla tiganeeeaascaaa
+                                .splineToSplineHeading(new Pose2d(37,10, Math.toRadians(0)), Math.toRadians(-90))
+                                .lineToSplineHeading(new Pose2d(-58,10, Math.toRadians(0)))
+                                .lineToSplineHeading(new Pose2d(38,10, Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(50,47, Math.toRadians(0)), Math.toRadians(90))
+                                //ciclu2
+                                .lineToLinearHeading(new Pose2d(45,45, Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(37,10, Math.toRadians(0)), Math.toRadians(-90))
+                                .lineToSplineHeading(new Pose2d(-58,10, Math.toRadians(0)))
+                                .lineToSplineHeading(new Pose2d(38,10, Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(50,47, Math.toRadians(0)), Math.toRadians(90))
+                                //parcare
+                                .lineToLinearHeading(new Pose2d(45,45, Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(58,10, Math.toRadians(0)), Math.toRadians(0))
+
                                 .build());
+        //auto long blue left
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
                 .setDarkMode(true)
