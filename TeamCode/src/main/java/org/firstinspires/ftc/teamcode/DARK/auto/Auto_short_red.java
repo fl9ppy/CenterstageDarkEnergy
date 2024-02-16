@@ -81,7 +81,7 @@ public class Auto_short_red extends LinearOpMode {
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
                 .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(52,-38, Math.toRadians(0)))                .waitSeconds(0.200)
+                .lineToLinearHeading(new Pose2d(53,-38, Math.toRadians(0)))                .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarer = drive.trajectorySequenceBuilder(pixel2r.end())
@@ -109,7 +109,7 @@ public class Auto_short_red extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(51,-33, Math.toRadians(0)))
                 .waitSeconds(0.200)
 
-                
+
                 .build();
 
         TrajectorySequence parcarec = drive.trajectorySequenceBuilder(pixel2c.end())

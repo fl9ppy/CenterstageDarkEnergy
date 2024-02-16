@@ -13,7 +13,6 @@ import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 @Config
 public class DriveDark extends LinearOpMode {
     private RobotUtils robot;
-    private double loopTime;
     private static final double  DRIVE_SCALE = 1.7;
     private static final double TURBO_SCALE = 1;
     private static final double PRECISION_SCALE = 4;
@@ -58,7 +57,7 @@ public class DriveDark extends LinearOpMode {
                             )
                     );
 
-            drive.update();
+            //drive.update();
 
             //outake
             if(gamepad1.right_bumper) robot.outake_open();
@@ -66,21 +65,30 @@ public class DriveDark extends LinearOpMode {
 
             /*-------------------------P2-------------------------*/
 
+
             //Sliders
             if(gamepad2.right_trigger >= 0.3){
-                robot.slider1.setPower(0.75);
-                robot.slider2.setPower(-0.75);
+                robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+                robot.slider1.setPower(1);
+                robot.slider2.setPower(-1);
+
             } else if(gamepad2.left_trigger >= 0.3) {
-                robot.slider1.setPower(-0.75);
-                robot.slider2.setPower(0.75);
+                robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+                robot.slider1.setPower(-1);
+                robot.slider2.setPower(1);
+
             } else{
                 robot.slider1.setPower(0);
                 robot.slider2.setPower(0);
             }
 
             //Intake
-            if(gamepad2.left_bumper) robot.intake.setPower(0.75);
-            else if(gamepad2.right_bumper) robot.intake.setPower(-0.75);
+            if(gamepad2.left_bumper) robot.intake_power(); // inghite
+            else if(gamepad2.right_bumper) robot.inverse_intake_power(); // scuipa
             else robot.intake.setPower(0);
 
             //Arm
@@ -91,17 +99,12 @@ public class DriveDark extends LinearOpMode {
             if(gamepad2.triangle) robot.planeLaunch();
             if(gamepad2.cross) robot.planeArmed();
 
-            /*-------------------------TELEMETRY-------------------------*/
+            //Intake extension
+            if(gamepad2.dpad_up) robot.extension_up();
+            if(gamepad2.dpad_down) robot.extension_down();
 
-            telemetry.addData("slider1: ", robot.slider1.getCurrentPosition());
-            telemetry.addData("slider2: ", robot.slider2.getCurrentPosition());
-            telemetry.addData("Mod sasiu: ", currentMode.toString());
-
-            double loop = System.nanoTime();
-            telemetry.addData("hz: ", 1000000000 / (loop - loopTime));
-            loopTime = loop;
-
-            telemetry.update();
+            //Stack controls
+            robot.stack(0.3);
         }
     }
 }

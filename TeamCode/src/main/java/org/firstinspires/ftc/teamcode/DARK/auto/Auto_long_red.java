@@ -122,13 +122,13 @@ public class Auto_long_red extends LinearOpMode {
 //              ------------left----------
         TrajectorySequence pixel1l = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-38,-29, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(-31,-26, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-34,-26, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence pedruml = drive.trajectorySequenceBuilder(pixel1l.end())
-                .lineToLinearHeading(new Pose2d(-35,-7, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-35,-6, Math.toRadians(180)))
                 .turn(Math.toRadians(-180))
-                .lineToLinearHeading(new Pose2d(47, -7, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47, -6, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence pixel2l = drive.trajectorySequenceBuilder(pedruml.end())
@@ -157,8 +157,8 @@ public class Auto_long_red extends LinearOpMode {
                             ,detectionPipeline.getZoneLuminosity(24))
                     ,detectionPipeline.getZoneLuminosity(25));
 
-            if (zoneright<zonemid && zoneright<141) zone = ZoneType.RIGHT;
-            else if (zonemid < zoneright && zonemid<130)zone = ZoneType.CENTER;
+            if (zoneright<zonemid && zoneright<140) zone = ZoneType.RIGHT;
+            else if (zonemid < zoneright && zonemid<90)zone = ZoneType.CENTER;
             else zone = ZoneType.LEFT;
 
             telemetry.addData("zone = ",zone.toString());
@@ -186,7 +186,7 @@ public class Auto_long_red extends LinearOpMode {
         switch(zoneFinal){
             case LEFT:
                 drive.followTrajectorySequence(pixel1l);
-                sleep(200);
+                sleep(4000);
                 drive.followTrajectorySequence(pedruml);
                 sleep(200);
                 drive.followTrajectorySequence(pixel2l);
@@ -196,7 +196,7 @@ public class Auto_long_red extends LinearOpMode {
                 drive.followTrajectorySequence(parcarel);
                 break;
             case CENTER: drive.followTrajectorySequence(pixel1c);
-                sleep(200);
+                sleep(4000);
                 drive.followTrajectorySequence(pedrumc);
                 sleep(200);
                 drive.followTrajectorySequence(pixel2c);
@@ -206,7 +206,7 @@ public class Auto_long_red extends LinearOpMode {
                 drive.followTrajectorySequence(parcarec);
                 break;
             case RIGHT: drive.followTrajectorySequence(pixel1r);
-                sleep(200);
+                sleep(4000);
                 drive.followTrajectorySequence(pedrumr);
                 sleep(200);
                 drive.followTrajectorySequence(pixel2r);

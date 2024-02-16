@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.DARK.utils;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
+
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -14,40 +16,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 @Config
 
 public class RobotUtils {
-    public DcMotor slider1;
-    public DcMotor slider2;
-
-    public Servo plane;
-
-    public ServoImplEx axon1;
-    public ServoImplEx axon2;
-
-    public Servo outake;
-    public DcMotor intake;
-
-    public RevColorSensorV3 sensor1;
-    public RevColorSensorV3 sensor2;
-    public Servo intake_extension;
-    public Servo intake_wheel;
-    public static double wheel_back = 0;
-    public static double wheel_forward = 1;
-    public static double extension_up = 0;
-    public static double extension_down = 0;
-
-    public static double outake_close = 0.5;
-    public static double outake_open = 0.2;
-
-    public static double plane_launch_pos = 0.7;
-    public static double plane_armed_pos = 0;
-
-    public static double axon_up_pos = 0.36;
-    public static double axon_down_pos = 0;
-
-    public static int slider_up1 = -725;
-    public static int slider_up2= 725;
-    public static int slider_down1 = 14;
-    public static int slider_down2 = -14;
-    public static double slider_power = 0.75;
+    public DcMotor slider1, slider2, intake;
+    public Servo plane, outake;
+    public ServoImplEx axon1, axon2, intake_extension;
+    public RevColorSensorV3 sensor1, sensor2;
+    public static double extension_up = 0.3, extension_down = 0, extension_stack = 0;
+    public static double outake_close = 0.5, outake_open = 0.2, diff=0;
+    public static double plane_launch_pos = 0.7, plane_armed_pos = 0;
+    public static double axon_up_pos = 0.36, axon_down_pos = 0;
+    public static int slider_up1 = -725, slider_up2= 725, slider_down1 = 14, slider_down2 = -14;
 
      public RobotUtils(HardwareMap hardwareMap){
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
@@ -64,8 +41,7 @@ public class RobotUtils {
       sensor1 = hardwareMap.get(RevColorSensorV3.class, "sensor1");
       sensor2 = hardwareMap.get(RevColorSensorV3.class, "sensor2");
 
-      intake_extension = hardwareMap.get(Servo.class, "intake_extension");
-      intake_wheel = hardwareMap.get(Servo.class, "intake_wheel");
+      intake_extension = hardwareMap.get(ServoImplEx.class, "intake_extension");
 
       slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       slider1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -79,6 +55,7 @@ public class RobotUtils {
 
       axon1.setPwmRange(new PwmControl.PwmRange(505, 2495));
       axon2.setPwmRange(new PwmControl.PwmRange(505, 2495));
+      intake_extension.setPwmRange(new PwmControl.PwmRange(505, 2495));
      }
 
      public void setSliderPositions(int position){
@@ -105,9 +82,17 @@ public class RobotUtils {
             slider2.setPower(-absPower);
         }
     }
+
+    public void stack(double position){
+         if(position == extension_down) position = extension_up;
+         if(gamepad2.dpad_right)
+            intake_extension.setPosition(position);
+         stack(position += diff);
+    }
+
     public void slider_up(){
-         slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-         slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slider1.setTargetPosition(slider_up1);
         slider2.setTargetPosition(slider_up2);
         slider1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -138,10 +123,8 @@ public class RobotUtils {
     public void planeArmed() {plane.setPosition(plane_armed_pos);}
     public void outake_open() {outake.setPosition(outake_open);}
     public void outake_close() {outake.setPosition(outake_close);}
-   // public void slider_up() {goSliderToPosition(slider_up, 0.5);}
- //   public void slider_down() {goSliderToPosition(slider_down, 0.5);}
-   public void extension_up() {intake_extension.setPosition(extension_up);}
+    public void extension_up() {intake_extension.setPosition(extension_up);}
     public void extension_down() {intake_extension.setPosition(extension_down);}
-    public void intake_power() {intake.setPower(0.75);}
-    public void intake0() {intake.setPower(0);}
+    public void intake_power() {intake.setPower(0.85);}
+    public void inverse_intake_power() {intake.setPower(-0.75);}
 }

@@ -124,7 +124,7 @@ public class Auto_long_blue extends LinearOpMode {
 //              ------------left----------
         TrajectorySequence pixel1l = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-40,30, Math.toRadians(0)))
-                .lineToSplineHeading(new Pose2d(-26, 30, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(-31, 30, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(-40,30, Math.toRadians(0)))
                 .build();
 
@@ -189,7 +189,7 @@ public class Auto_long_blue extends LinearOpMode {
         switch(zoneFinal){
             case LEFT:
                 drive.followTrajectorySequence(pixel1l);
-                        sleep(200);
+                        sleep(4000);
                         drive.followTrajectorySequence(pedruml);
                         sleep(200);
                         drive.followTrajectorySequence(pixel2l);
@@ -199,7 +199,7 @@ public class Auto_long_blue extends LinearOpMode {
                         drive.followTrajectorySequence(parcarel);
                 break;
             case CENTER: drive.followTrajectorySequence(pixel1c);
-                sleep(200);
+                sleep(4000);
                 drive.followTrajectorySequence(pedrumc);
                 sleep(200);
                 drive.followTrajectorySequence(pixel2c);
@@ -209,7 +209,7 @@ public class Auto_long_blue extends LinearOpMode {
                 drive.followTrajectorySequence(parcarec);
                 break;
             case RIGHT: drive.followTrajectorySequence(pixel1r);
-                sleep(200);
+                sleep(4000);
                 drive.followTrajectorySequence(pedrumr);
                 sleep(200);
                 drive.followTrajectorySequence(pixel2r);
