@@ -103,8 +103,13 @@ public class DriveDark extends LinearOpMode {
             if(gamepad2.dpad_up) robot.extension_up();
             if(gamepad2.dpad_down) robot.extension_down();
 
+            int cnt = 0;
             //Stack controls
-            robot.stack(0.3);
+            if(gamepad2.dpad_right){
+                cnt++;
+                robot.stack(cnt);
+                if(cnt > 5) cnt = 0;
+            }
         }
     }
 }

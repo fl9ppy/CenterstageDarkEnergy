@@ -83,11 +83,19 @@ public class RobotUtils {
         }
     }
 
-    public void stack(double position){
-         if(position == extension_down) position = extension_up;
-         if(gamepad2.dpad_right)
-            intake_extension.setPosition(position);
-         stack(position += diff);
+//    public void stack(double position){
+//         if(position == extension_down) position = extension_up;
+//         if(gamepad2.dpad_right)
+//            intake_extension.setPosition(position);
+//         stack(position += diff);
+//    }
+
+    public void stack(int x){
+        if(x == 1) intake_extension.setPosition(0.1);
+        if(x == 2) intake_extension.setPosition(0.2);
+        if(x == 3) intake_extension.setPosition(0.3);
+        if(x == 4) intake_extension.setPosition(0);
+        if(x == 5) intake_extension.setPosition(0);
     }
 
     public void slider_up(){
