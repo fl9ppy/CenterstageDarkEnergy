@@ -15,12 +15,11 @@ import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 
 public class Debugging extends LinearOpMode {
     private RobotUtils robot;
-    private static final double DRIVE_SCALE = 1.7;
-    private static final double TURBO_SCALE = 1;
-    private static final double PRECISION_SCALE = 4;
+    ElapsedTime timer = new ElapsedTime();
+    private static final double DRIVE_SCALE = 1.7, TURBO_SCALE = 1, PRECISION_SCALE = 4;
     boolean buttonWasPressed = false;
     int cnt = 0;
-    ElapsedTime timer = new ElapsedTime();
+    double loopTime = 0;
 
     enum Modedrive {
         DRIVER_CONTROL,
@@ -78,14 +77,14 @@ public class Debugging extends LinearOpMode {
             if (gamepad2.right_trigger >= 0.3) {
                 robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//
+
                 robot.slider1.setPower(1);
                 robot.slider2.setPower(-1);
 
             } else if (gamepad2.left_trigger >= 0.3) {
                 robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//
+
                 robot.slider1.setPower(-1);
                 robot.slider2.setPower(1);
 
@@ -120,11 +119,13 @@ public class Debugging extends LinearOpMode {
                         timer.reset();
                     }
                 }
-            else {
-                buttonWasPressed = false;
-            }
+            else buttonWasPressed = false;
 
             if (buttonWasPressed) {
+                if(gamepad2.dpad_up || gamepad2.dpad_down){
+                    cnt=0;
+                    buttonWasPressed = false;
+                }
                 cnt++;
                 buttonWasPressed = false;
             }
@@ -138,6 +139,21 @@ public class Debugging extends LinearOpMode {
                 cnt = 0;
             }
 
+            /*-------------------------BOTH-------------------------*/
+
+            //Pixel detection
+
+            boolean ok = true;
+            if(robot.hasDetected()){
+                gamepad1.rumble(500);
+                gamepad2.rumble(500);
+                if(robot.slider2.getCurrentPosition() >= 100 && robot.slider2.getCurrentPosition() <= 150) robot.outake_close();
+            }
+
+            double loop = System.nanoTime();
+            telemetry.addData("hz ", 1000000000 / (loop - loopTime));
+            loopTime = loop;
+            telemetry.addData("has detected both pixel: ", robot.hasDetected());
             telemetry.addData("pressed: ", cnt);
             telemetry.addData("slider1: ", robot.slider1.getCurrentPosition());
             telemetry.addData("slider2: ", robot.slider2.getCurrentPosition());

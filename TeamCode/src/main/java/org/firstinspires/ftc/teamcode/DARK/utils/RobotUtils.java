@@ -121,9 +121,8 @@ public class RobotUtils {
         axon2.setPosition(axon_down_pos);
     }
 
-    public boolean hasDetected1pixel(){
-         if(sensor1.getDistance(DistanceUnit.MM) > 2)
-             return true;
+    public boolean hasDetected(){
+         if(sensor1.getDistance(DistanceUnit.MM) <= 10 || sensor2.getDistance(DistanceUnit.MM) <= 10) return true;
          return false;
     }
 
