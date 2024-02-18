@@ -13,13 +13,13 @@ import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 @TeleOp(name="Debugging", group = "Debugging")
 @Config
 
-public class Debugging extends LinearOpMode {
+public class DriveDark extends LinearOpMode {
     private RobotUtils robot;
     ElapsedTime timer = new ElapsedTime();
     private static final double DRIVE_SCALE = 1.7, TURBO_SCALE = 1, PRECISION_SCALE = 4;
     boolean buttonWasPressed = false;
     int cnt = 0;
-    public static double loopTime = 0, pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0, pos5 = 0;
+    public static double loopTime = 0;
 
     enum Modedrive {
         DRIVER_CONTROL,
