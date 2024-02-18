@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.DARK.utils.RobotUtils;
 import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
@@ -17,22 +18,9 @@ public class Debugging extends LinearOpMode {
     private static final double DRIVE_SCALE = 1.7;
     private static final double TURBO_SCALE = 1;
     private static final double PRECISION_SCALE = 4;
-    boolean lastButtonState = false;
+    boolean buttonWasPressed = false;
     int cnt = 0;
-
-    public int buttonPressedDPADRIGHT() {
-        if (gamepad2.dpad_right) cnt++;
-        if (cnt > 5) cnt = 0;
-        return cnt;
-    }
-
-    enum ModeBrat {
-        PIXEL1,
-        PIXEL2,
-        PIXEL3,
-        PIXEL4,
-        PIXEL5
-    }
+    ElapsedTime timer = new ElapsedTime();
 
     enum Modedrive {
         DRIVER_CONTROL,
@@ -41,7 +29,6 @@ public class Debugging extends LinearOpMode {
     }
 
     Modedrive currentMode = Modedrive.DRIVER_CONTROL;
-    ModeBrat bratMode = ModeBrat.PIXEL1;
 
     public void runOpMode() throws InterruptedException {
 
@@ -126,15 +113,21 @@ public class Debugging extends LinearOpMode {
 
             //Stack controls
 
-            boolean buttonState = gamepad2.dpad_right; // Change to the appropriate button
-
-            // If the button is pressed and was not pressed before
-            if (buttonState && !lastButtonState) {
-                cnt++; // Increment press count
+            if (gamepad2.dpad_right)
+                if (!buttonWasPressed) {
+                    if(timer.milliseconds() > 100) {
+                        buttonWasPressed = true;
+                        timer.reset();
+                    }
+                }
+            else {
+                buttonWasPressed = false;
             }
 
-            // Update last button state
-            lastButtonState = buttonState;
+            if (buttonWasPressed) {
+                cnt++;
+                buttonWasPressed = false;
+            }
 
             if (cnt == 1) robot.intake_extension.setPosition(0);
             if (cnt == 2) robot.intake_extension.setPosition(0.1);
@@ -145,8 +138,7 @@ public class Debugging extends LinearOpMode {
                 cnt = 0;
             }
 
-            telemetry.addData("brat: ", bratMode.toString());
-            telemetry.addData("pressed: ", buttonPressedDPADRIGHT());
+            telemetry.addData("pressed: ", cnt);
             telemetry.addData("slider1: ", robot.slider1.getCurrentPosition());
             telemetry.addData("slider2: ", robot.slider2.getCurrentPosition());
             telemetry.addData("intake_extension: ", robot.intake_extension.getPosition());

@@ -83,13 +83,6 @@ public class RobotUtils {
         }
     }
 
-//    public void stack(double position){
-//         if(position == extension_down) position = extension_up;
-//         if(gamepad2.dpad_right)
-//            intake_extension.setPosition(position);
-//         stack(position += diff);
-//    }
-
     public void stack(int x){
         if(x == 1) intake_extension.setPosition(0.1);
         if(x == 2) intake_extension.setPosition(0.2);
@@ -127,12 +120,24 @@ public class RobotUtils {
         axon1.setPosition(axon_down_pos);
         axon2.setPosition(axon_down_pos);
     }
+
+    public boolean hasDetected1pixel(){
+         if(sensor1.getDistance(DistanceUnit.MM))
+    }
+
     public void planeLaunch() {plane.setPosition(plane_launch_pos);}
+
     public void planeArmed() {plane.setPosition(plane_armed_pos);}
+
     public void outake_open() {outake.setPosition(outake_open);}
+
     public void outake_close() {outake.setPosition(outake_close);}
+
     public void extension_up() {intake_extension.setPosition(extension_up);}
+
     public void extension_down() {intake_extension.setPosition(extension_down);}
+
     public void intake_power() {intake.setPower(0.85);}
+
     public void inverse_intake_power() {intake.setPower(-0.75);}
 }
