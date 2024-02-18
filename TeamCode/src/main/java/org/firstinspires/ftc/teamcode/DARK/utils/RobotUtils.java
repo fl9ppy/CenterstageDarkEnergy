@@ -20,10 +20,10 @@ public class RobotUtils {
     public Servo plane, outake;
     public ServoImplEx axon1, axon2, intake_extension;
     public RevColorSensorV3 sensor1, sensor2;
-    public static double extension_up = 0.3, extension_down = 0, extension_stack = 0;
+    public static double extension_up = 0.4, extension_down = 0, extension_stack = 0;
     public static double outake_close = 0.5, outake_open = 0.2, diff=0;
     public static double plane_launch_pos = 0.7, plane_armed_pos = 0;
-    public static double axon_up_pos = 0.36, axon_down_pos = 0;
+    public static double axon_up_pos = 0.38, axon_down_pos = 0;
     public static int slider_up1 = -725, slider_up2= 725, slider_down1 = 14, slider_down2 = -14;
 
      public RobotUtils(HardwareMap hardwareMap){
@@ -81,14 +81,6 @@ public class RobotUtils {
             slider1.setPower(absPower);
             slider2.setPower(-absPower);
         }
-    }
-
-    public void stack(int x){
-        if(x == 1) intake_extension.setPosition(0.1);
-        if(x == 2) intake_extension.setPosition(0.2);
-        if(x == 3) intake_extension.setPosition(0.3);
-        if(x == 4) intake_extension.setPosition(0);
-        if(x == 5) intake_extension.setPosition(0);
     }
 
     public void slider_up(){

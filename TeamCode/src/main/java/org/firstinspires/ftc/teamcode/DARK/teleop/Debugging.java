@@ -19,7 +19,7 @@ public class Debugging extends LinearOpMode {
     private static final double DRIVE_SCALE = 1.7, TURBO_SCALE = 1, PRECISION_SCALE = 4;
     boolean buttonWasPressed = false;
     int cnt = 0;
-    double loopTime = 0;
+    public static double loopTime = 0, pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0, pos5 = 0;
 
     enum Modedrive {
         DRIVER_CONTROL,
@@ -107,8 +107,14 @@ public class Debugging extends LinearOpMode {
             if (gamepad2.cross) robot.planeArmed();
 
             //Intake extension
-            if (gamepad2.dpad_up) robot.extension_up();
-            if (gamepad2.dpad_down) robot.extension_down();
+            if (gamepad2.dpad_up) {
+                robot.extension_up();
+                cnt=0;
+            }
+            if (gamepad2.dpad_down){
+                robot.extension_down();
+                cnt = 0;
+            }
 
             //Stack controls
 
@@ -122,20 +128,16 @@ public class Debugging extends LinearOpMode {
             else buttonWasPressed = false;
 
             if (buttonWasPressed) {
-                if(gamepad2.dpad_up || gamepad2.dpad_down){
-                    cnt=0;
-                    buttonWasPressed = false;
-                }
                 cnt++;
                 buttonWasPressed = false;
             }
 
-            if (cnt == 1) robot.intake_extension.setPosition(0);
+            if (cnt == 1) robot.intake_extension.setPosition(0.15);
             if (cnt == 2) robot.intake_extension.setPosition(0.1);
-            if (cnt == 3) robot.intake_extension.setPosition(0.2);
-            if (cnt == 4) robot.intake_extension.setPosition(0.3);
+            if (cnt == 3) robot.intake_extension.setPosition(0.05);
+            if (cnt == 4) robot.intake_extension.setPosition(0.01);
             if (cnt == 5) {
-                robot.intake_extension.setPosition(0.4);
+                robot.intake_extension.setPosition(0);
                 cnt = 0;
             }
 
