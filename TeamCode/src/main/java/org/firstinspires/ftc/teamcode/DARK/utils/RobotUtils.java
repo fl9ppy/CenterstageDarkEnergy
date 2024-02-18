@@ -122,7 +122,9 @@ public class RobotUtils {
     }
 
     public boolean hasDetected1pixel(){
-         if(sensor1.getDistance(DistanceUnit.MM))
+         if(sensor1.getDistance(DistanceUnit.MM) > 2)
+             return true;
+         return false;
     }
 
     public void planeLaunch() {plane.setPosition(plane_launch_pos);}
