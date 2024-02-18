@@ -1,24 +1,22 @@
 package org.firstinspires.ftc.teamcode.DARK.utils;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
-
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PwmControl;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 @Config
 
 public class RobotUtils {
+    public ElapsedTime runtime = new ElapsedTime();
     public DcMotor slider1, slider2, intake;
-    public Servo plane, outake;
-    public ServoImplEx axon1, axon2, intake_extension;
+    public Servo plane;
+    public ServoImplEx axon1, axon2, intake_extension, outake;
     public RevColorSensorV3 sensor1, sensor2;
     public static double extension_up = 0.4, extension_down = 0;
     public static double outake_close = 0.5, outake_open = 0.2;
@@ -35,7 +33,7 @@ public class RobotUtils {
       axon1 = hardwareMap.get(ServoImplEx.class, "axon1");
       axon2 = hardwareMap.get(ServoImplEx.class, "axon2");
 
-      outake = hardwareMap.get(Servo.class, "outake");
+      outake = hardwareMap.get(ServoImplEx.class, "outake");
       intake = hardwareMap.get(DcMotor.class, "intake");
 
       sensor1 = hardwareMap.get(RevColorSensorV3.class, "sensor1");
@@ -56,6 +54,7 @@ public class RobotUtils {
       axon1.setPwmRange(new PwmControl.PwmRange(505, 2495));
       axon2.setPwmRange(new PwmControl.PwmRange(505, 2495));
       intake_extension.setPwmRange(new PwmControl.PwmRange(505, 2495));
+      outake.setPwmRange(new PwmControl.PwmRange(505, 2495));
      }
 
      public void setSliderPositions(int position){
@@ -81,6 +80,22 @@ public class RobotUtils {
             slider1.setPower(absPower);
             slider2.setPower(-absPower);
         }
+    }
+
+    public void openAndCloseGate(Servo servo, double openPosition, double closedPosition, long duration) {
+        // Open the gate
+        servo.setPosition(openPosition);
+
+        // Start the runtime
+        runtime.reset();
+
+        // Wait until the duration has passed
+        while (runtime.milliseconds() < duration) {
+            // Do nothing while waiting
+        }
+
+        // Close the gate
+        servo.setPosition(closedPosition);
     }
 
     public void slider_up(){
@@ -122,7 +137,8 @@ public class RobotUtils {
 
     public void planeArmed() {plane.setPosition(plane_armed_pos);}
 
-    public void outake_open() {outake.setPosition(outake_open);}
+    public void outake_open() {openAndCloseGate(outake, outake_open, outake_close, 120);}
+    public void outake_drop() {outake.setPosition(outake_open);}
 
     public void outake_close() {outake.setPosition(outake_close);}
 

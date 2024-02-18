@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.DARK.utils.RobotUtils;
 import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 
-@TeleOp(name="Debugging", group = "Debugging")
+@TeleOp(name="DriveDark", group = "drive")
 @Config
 
 public class DriveDark extends LinearOpMode {

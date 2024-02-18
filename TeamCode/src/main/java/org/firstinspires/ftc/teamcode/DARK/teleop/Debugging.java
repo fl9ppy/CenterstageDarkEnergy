@@ -68,6 +68,7 @@ public class Debugging extends LinearOpMode {
 
             //outake
             if (gamepad1.right_bumper) robot.outake_open();
+            if (gamepad1.right_stick_button) robot.outake_drop();
             if (gamepad1.left_bumper) robot.outake_close();
 
             /*-------------------------P2-------------------------*/
