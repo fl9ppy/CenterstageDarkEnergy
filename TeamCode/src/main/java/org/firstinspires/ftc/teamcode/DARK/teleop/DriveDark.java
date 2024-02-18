@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.DARK.utils.RobotUtils;
 import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 
-@TeleOp(name="DriveDark", group = "drive")
+@TeleOp(name="Drive", group = "DriveDark")
 @Config
 
 public class DriveDark extends LinearOpMode {
@@ -19,6 +19,7 @@ public class DriveDark extends LinearOpMode {
     private static final double DRIVE_SCALE = 1.7, TURBO_SCALE = 1, PRECISION_SCALE = 4;
     boolean buttonWasPressed = false;
     int cnt = 0;
+    public static double loopTime = 0;
 
     enum Modedrive {
         DRIVER_CONTROL,
@@ -63,10 +64,9 @@ public class DriveDark extends LinearOpMode {
                     )
             );
 
-            //drive.update();
-
             //outake
             if (gamepad1.right_bumper) robot.outake_open();
+            if (gamepad1.right_stick_button) robot.outake_drop();
             if (gamepad1.left_bumper) robot.outake_close();
 
             /*-------------------------P2-------------------------*/
@@ -93,8 +93,8 @@ public class DriveDark extends LinearOpMode {
             }
 
             //Intake
-            if (gamepad2.left_bumper) robot.intake_power(); // inghite
-            else if (gamepad2.right_bumper) robot.inverse_intake_power(); // scuipa
+            if (gamepad2.left_bumper) robot.intake_power(); // in
+            else if (gamepad2.right_bumper) robot.inverse_intake_power(); // out
             else robot.intake.setPower(0);
 
             //Arm
@@ -144,7 +144,6 @@ public class DriveDark extends LinearOpMode {
 
             //Pixel detection
 
-            boolean ok = true;
             if(robot.hasDetected()){
                 gamepad1.rumble(500);
                 gamepad2.rumble(500);

@@ -37,8 +37,8 @@ public class Debugging extends LinearOpMode {
 
         robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.slider1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        robot.slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        robot.slider1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        robot.slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         robot.extension_up();
 
@@ -90,8 +90,16 @@ public class Debugging extends LinearOpMode {
                 robot.slider2.setPower(1);
 
             } else {
-                robot.slider1.setPower(0);
-                robot.slider2.setPower(0);
+                //TODO: FUNCTIE EXPERIMENTALA. Trebuie testata!
+                robot.slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                int currentPos = robot.slider2.getCurrentPosition();
+
+                robot.goSliderToPosition(currentPos, 0.1);
+
+//                robot.slider1.setPower(0);
+//                robot.slider2.setPower(0);
             }
 
             //Intake
@@ -153,6 +161,7 @@ public class Debugging extends LinearOpMode {
                 if(robot.slider2.getCurrentPosition() >= 100 && robot.slider2.getCurrentPosition() <= 150) robot.outake_close();
             }
 
+            /*-------------------------TELEMETRY-------------------------*/
             double loop = System.nanoTime();
             telemetry.addData("hz ", 1000000000 / (loop - loopTime));
             loopTime = loop;

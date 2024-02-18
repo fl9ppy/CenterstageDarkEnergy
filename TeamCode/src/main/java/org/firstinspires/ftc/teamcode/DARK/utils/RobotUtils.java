@@ -14,6 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class RobotUtils {
     public ElapsedTime runtime = new ElapsedTime();
+    public ElapsedTime runtime2 = new ElapsedTime();
     public DcMotor slider1, slider2, intake;
     public Servo plane;
     public ServoImplEx axon1, axon2, intake_extension, outake;
@@ -65,7 +66,7 @@ public class RobotUtils {
      public void goSliderToPosition(int position, double power) {
         double absPower = Math.abs(power);
 
-        int currentPos = slider1.getCurrentPosition();
+        int currentPos = slider2.getCurrentPosition();
 
         setSliderPositions(position);
 
@@ -73,28 +74,22 @@ public class RobotUtils {
         slider2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         if (currentPos > position) {
-            slider1.setPower(-absPower);
-            slider2.setPower(absPower);
-        }
-        else if (currentPos < position) {
             slider1.setPower(absPower);
             slider2.setPower(-absPower);
         }
+        else if (currentPos < position) {
+            slider1.setPower(-absPower);
+            slider2.setPower(absPower);
+        }
     }
 
-    public void openAndCloseGate(Servo servo, double openPosition, double closedPosition, long duration) {
-        // Open the gate
+    public void drop1pixel(Servo servo, double openPosition, double closedPosition, long duration) {
         servo.setPosition(openPosition);
 
-        // Start the runtime
         runtime.reset();
 
-        // Wait until the duration has passed
-        while (runtime.milliseconds() < duration) {
-            // Do nothing while waiting
-        }
+        while(runtime.milliseconds() < duration) {/***The function just waits for the sleeping time***/}
 
-        // Close the gate
         servo.setPosition(closedPosition);
     }
 
@@ -133,18 +128,31 @@ public class RobotUtils {
          return false;
     }
 
+    public void extension_up() {intake_extension.setPosition(extension_up);}
+
+    public void extension_down() {intake_extension.setPosition(extension_down);}
+
+    //Only for auto
+    public void stack1(){intake_extension.setPosition(0.1);}
+
+    public void stack2(){intake_extension.setPosition(0.05);}
+
+    public void stopIntakeAuto(long duration){
+        runtime2.reset();
+         if(hasDetected() && runtime2.seconds() >= duration) {
+             intake.setPower(0);
+             extension_up();
+         }
+    }
+
     public void planeLaunch() {plane.setPosition(plane_launch_pos);}
 
     public void planeArmed() {plane.setPosition(plane_armed_pos);}
 
-    public void outake_open() {openAndCloseGate(outake, outake_open, outake_close, 120);}
-    public void outake_drop() {outake.setPosition(outake_open);}
+    public void outake_open() {outake.setPosition(outake_open);}
+    public void outake_drop() {drop1pixel(outake, outake_open, outake_close, 120);}
 
     public void outake_close() {outake.setPosition(outake_close);}
-
-    public void extension_up() {intake_extension.setPosition(extension_up);}
-
-    public void extension_down() {intake_extension.setPosition(extension_down);}
 
     public void intake_power() {intake.setPower(0.85);}
 
