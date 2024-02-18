@@ -20,8 +20,8 @@ public class RobotUtils {
     public Servo plane, outake;
     public ServoImplEx axon1, axon2, intake_extension;
     public RevColorSensorV3 sensor1, sensor2;
-    public static double extension_up = 0.4, extension_down = 0, extension_stack = 0;
-    public static double outake_close = 0.5, outake_open = 0.2, diff=0;
+    public static double extension_up = 0.4, extension_down = 0;
+    public static double outake_close = 0.5, outake_open = 0.2;
     public static double plane_launch_pos = 0.7, plane_armed_pos = 0;
     public static double axon_up_pos = 0.38, axon_down_pos = 0;
     public static int slider_up1 = -725, slider_up2= 725, slider_down1 = 14, slider_down2 = -14;
