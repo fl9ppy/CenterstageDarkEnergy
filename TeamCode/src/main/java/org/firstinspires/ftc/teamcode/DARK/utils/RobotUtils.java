@@ -77,6 +77,7 @@ public class RobotUtils {
 
         if (currentPos > position) {
             slider1.setPower(absPower);
+            slider1.setPower(absPower);
             slider2.setPower(-absPower);
         }
         else if (currentPos < position) {

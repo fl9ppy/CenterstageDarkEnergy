@@ -36,10 +36,8 @@ public class Debugging extends LinearOpMode {
 
         robot = new RobotUtils(hardwareMap);
 
-//        robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        robot.slider1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        robot.slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         robot.extension_up();
 
@@ -96,17 +94,14 @@ public class Debugging extends LinearOpMode {
 
             } else {
                 if(!holdSliders) {
-                    int currentPos1 = robot.slider1.getCurrentPosition();
                     int currentPos2 = robot.slider2.getCurrentPosition();
 
-                    robot.slider1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    robot.slider2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    robot.slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                    robot.slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
                     robot.goSliderToPosition(currentPos2, 0.5);
                 }
                 holdSliders = true;
-//                robot.slider1.setPower(0);
-//                robot.slider2.setPower(0);
             }
 
             //Intake
