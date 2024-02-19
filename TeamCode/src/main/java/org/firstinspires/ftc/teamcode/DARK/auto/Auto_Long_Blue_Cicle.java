@@ -7,11 +7,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.DARK.detection.DetectionPipeline;
-import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.DARK.utils.RobotUtils;
-import org.firstinspires.ftc.teamcode.drive.opmode.StrafeTest;
+import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -94,7 +92,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
                 .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
-                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto(1);})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -114,7 +112,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
                 .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
-                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto(1);})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -161,7 +159,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
                 .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
-                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto(1);})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -181,7 +179,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
                 .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
-                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto(1);})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -229,7 +227,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
                 .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
-                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto(1);})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -249,7 +247,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
                 .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
-                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto(1);})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
