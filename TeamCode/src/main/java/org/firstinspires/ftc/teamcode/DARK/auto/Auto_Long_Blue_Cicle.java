@@ -93,7 +93,8 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .splineToSplineHeading(new Pose2d(37,8, Math.toRadians(0)), Math.toRadians(-90))
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
-                .addTemporalMarker(0.4, ()->{robot.intake_power();})
+                .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -112,7 +113,8 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .splineToSplineHeading(new Pose2d(37,8, Math.toRadians(0)), Math.toRadians(-90))
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
-                .addTemporalMarker(0.4, ()->{robot.intake_power();})
+                .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -158,7 +160,8 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .splineToSplineHeading(new Pose2d(37,8, Math.toRadians(0)), Math.toRadians(-90))
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
-                .addTemporalMarker(0.4, ()->{robot.intake_power();})
+                .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -177,7 +180,8 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .splineToSplineHeading(new Pose2d(37,8, Math.toRadians(0)), Math.toRadians(-90))
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
-                .addTemporalMarker(0.4, ()->{robot.intake_power();})
+                .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -224,7 +228,8 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .splineToSplineHeading(new Pose2d(37,8, Math.toRadians(0)), Math.toRadians(-90))
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
-                .addTemporalMarker(0.4, ()->{robot.intake_power();})
+                .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();
@@ -243,7 +248,8 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .splineToSplineHeading(new Pose2d(37,8, Math.toRadians(0)), Math.toRadians(-90))
                 .lineToSplineHeading(new Pose2d(-58,8, Math.toRadians(0)))
                 .waitSeconds(0.2)
-                .addTemporalMarker(0.4, ()->{robot.intake_power();})
+                .addTemporalMarker(0.4, ()->{robot.intake_power(); robot.stack1();})
+                .addTemporalMarker(0.5, ()->{robot.stopIntakeAuto();})
                 .waitSeconds(0.3)
                 .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
                 .build();

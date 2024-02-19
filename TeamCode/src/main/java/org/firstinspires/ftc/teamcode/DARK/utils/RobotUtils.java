@@ -140,7 +140,7 @@ public class RobotUtils {
 
     public void stack2(){intake_extension.setPosition(0.05);}
 
-    public void stopIntakeAuto(long duration){
+    public void stopIntakeAuto(){
         runtime2.reset();
          if(hasDetected() && runtime2.seconds() >= duration) {
              intake.setPower(0);
