@@ -157,15 +157,14 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
                 .lineToLinearHeading(new Pose2d(45,36, Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(37,7, Math.toRadians(0)), Math.toRadians(-90))
-                .lineToSplineHeading(new Pose2d(-56,7, Math.toRadians(0)))
-                .waitSeconds(0.2)
+                .lineToSplineHeading(new Pose2d(-57,9, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence ciclu1stackc = drive.trajectorySequenceBuilder(ciclu1drumc.end())
                 .addTemporalMarker(0.1, ()->{robot.intake_power(); robot.stack1();})
                 .addTemporalMarker(0.9, ()->{robot.stopIntakeAuto(1);})
                 .waitSeconds(1.2)
-                .lineToSplineHeading(new Pose2d(37,8, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(37,9, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence ciclu1boardc = drive.trajectorySequenceBuilder(ciclu1stackc.end())
