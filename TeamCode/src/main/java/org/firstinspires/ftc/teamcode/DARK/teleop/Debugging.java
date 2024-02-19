@@ -20,6 +20,7 @@ public class Debugging extends LinearOpMode {
     boolean buttonWasPressed = false;
     int cnt = 0;
     public static double loopTime = 0;
+    public boolean holdSliders = false;
 
     enum Modedrive {
         DRIVER_CONTROL,
@@ -35,10 +36,10 @@ public class Debugging extends LinearOpMode {
 
         robot = new RobotUtils(hardwareMap);
 
-        robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.slider1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        robot.slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        robot.slider1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        robot.slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         robot.extension_up();
 
@@ -82,6 +83,8 @@ public class Debugging extends LinearOpMode {
                 robot.slider1.setPower(1);
                 robot.slider2.setPower(-1);
 
+                holdSliders = false;
+
             } else if (gamepad2.left_trigger >= 0.3) {
                 robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -89,9 +92,21 @@ public class Debugging extends LinearOpMode {
                 robot.slider1.setPower(-1);
                 robot.slider2.setPower(1);
 
+                holdSliders = false;
+
             } else {
-                robot.slider1.setPower(0);
-                robot.slider2.setPower(0);
+                if(!holdSliders) {
+                    int currentPos1 = robot.slider1.getCurrentPosition();
+                    int currentPos2 = robot.slider2.getCurrentPosition();
+
+                    robot.slider1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    robot.slider2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    robot.goSliderToPosition(currentPos2, 0.5);
+                }
+                holdSliders = true;
+//                robot.slider1.setPower(0);
+//                robot.slider2.setPower(0);
             }
 
             //Intake

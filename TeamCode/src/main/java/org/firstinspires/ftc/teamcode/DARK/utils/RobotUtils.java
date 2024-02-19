@@ -59,8 +59,8 @@ public class RobotUtils {
      }
 
      public void setSliderPositions(int position){
-         slider1.setTargetPosition(position);
-         slider2.setTargetPosition(-position);
+         slider1.setTargetPosition(-position);
+         slider2.setTargetPosition(position);
      }
 
      public void goSliderToPosition(int position, double power) {
