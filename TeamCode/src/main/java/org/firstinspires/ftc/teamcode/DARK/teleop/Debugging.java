@@ -37,8 +37,8 @@ public class Debugging extends LinearOpMode {
 
         robot.slider1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.slider2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        robot.slider1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        robot.slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.slider1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.slider2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         robot.extension_up();
 
@@ -90,16 +90,8 @@ public class Debugging extends LinearOpMode {
                 robot.slider2.setPower(1);
 
             } else {
-                //TODO: FUNCTIE EXPERIMENTALA. Trebuie testata!
-                robot.slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-                int currentPos = robot.slider2.getCurrentPosition();
-
-                robot.goSliderToPosition(currentPos, 0.1);
-
-//                robot.slider1.setPower(0);
-//                robot.slider2.setPower(0);
+                robot.slider1.setPower(0);
+                robot.slider2.setPower(0);
             }
 
             //Intake
