@@ -22,8 +22,8 @@ public class RobotUtils {
     public static double extension_up = 0.4, extension_down = 0;
     public static double outake_close = 0.25, outake_open = 0.43;
     public static double plane_launch_pos = 0.7, plane_armed_pos = 0;
-    public static double axon_up_pos = 0.38, axon_down_pos = 0;
-    public static int slider_up1 = -725, slider_up2= 725, slider_down1 = 14, slider_down2 = -14;
+    public static double axon_up_pos = 0.38, axon_down_pos = 0.0;
+    public static int slider_up1 = -800, slider_up2= 800, slider_down1 = 14, slider_down2 = -14;
 
      public RobotUtils(HardwareMap hardwareMap){
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
@@ -136,15 +136,28 @@ public class RobotUtils {
     public void extension_down() {intake_extension.setPosition(extension_down);}
 
     //Only for auto
-    public void stack1(){intake_extension.setPosition(0.1);}
 
-    public void stack2(){intake_extension.setPosition(0.05);}
+    public void stack1(){
+         intake_extension.setPosition(0.08);
+         intake.setPower(-1);
+    }
+
+    public void stack1_2(){
+        intake_extension.setPosition(0.07);
+        intake.setPower(-1);
+    }
+
+    public void stack2(){
+         intake_extension.setPosition(0.05);
+         intake.setPower(-1);
+     }
 
     public void stopIntakeAuto(int duration){
         runtime2.reset();
-         if(hasDetected() && runtime2.seconds() >= duration) {
+         if(hasDetected() && runtime2.milliseconds() >= duration) {
              intake.setPower(0);
              extension_up();
+             outake_close();
          }
     }
 
@@ -159,5 +172,5 @@ public class RobotUtils {
 
     public void intake_power() {intake.setPower(0.85);}
 
-    public void inverse_intake_power() {intake.setPower(-0.75);}
+    public void inverse_intake_power() {intake.setPower(-0.85);}
 }
