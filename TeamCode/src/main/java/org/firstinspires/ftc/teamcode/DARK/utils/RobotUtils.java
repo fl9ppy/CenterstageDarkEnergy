@@ -168,7 +168,7 @@ public class RobotUtils {
          while(currentPos > minPos){
              runtime3.reset();
              if(runtime3.milliseconds() >= duration){
-                 currentPos -= step;
+                 currentPos += step;
                  intake_extension.setPosition(currentPos);
              }
          }
