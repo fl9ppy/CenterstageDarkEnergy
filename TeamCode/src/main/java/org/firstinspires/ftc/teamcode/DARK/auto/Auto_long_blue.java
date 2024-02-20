@@ -68,8 +68,8 @@ public class Auto_long_blue extends LinearOpMode {
 
 //              ------------right----------
         TrajectorySequence pixel1r = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-54,29, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-60,29, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-55,29, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-58,29, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence pedrumr = drive.trajectorySequenceBuilder(pixel1r.end())
@@ -100,7 +100,7 @@ public class Auto_long_blue extends LinearOpMode {
                 .build();
 
         TrajectorySequence pedrumc = drive.trajectorySequenceBuilder(pixel1c.end())
-                .lineToLinearHeading(new Pose2d(-50, 5, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-47, 5, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(47, 5, Math.toRadians(0)))
                 .build();
 
@@ -160,8 +160,8 @@ public class Auto_long_blue extends LinearOpMode {
                             ,detectionPipeline.getZoneLuminosity(24))
                     ,detectionPipeline.getZoneLuminosity(25));
 
-            if (zoneright<zonemid && zoneright<80) zone = ZoneType.RIGHT;
-            else if (zonemid < zoneright && zonemid<80)zone = ZoneType.CENTER;
+            if (zoneright<zonemid && zoneright<129) zone = ZoneType.RIGHT;
+            else if (zonemid < zoneright && zonemid<121)zone = ZoneType.CENTER;
             else zone = ZoneType.LEFT;
 
             telemetry.addData("zone = ",zone.toString());
