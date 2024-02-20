@@ -13,8 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 @Config
 
 public class RobotUtils {
-    public ElapsedTime runtime = new ElapsedTime();
-    public ElapsedTime runtime2 = new ElapsedTime();
+    public ElapsedTime runtime = new ElapsedTime(), runtime2 = new ElapsedTime(), runtime3 = new ElapsedTime();
     public DcMotor slider1, slider2, intake;
     public Servo plane;
     public ServoImplEx axon1, axon2, intake_extension, outake;
@@ -159,6 +158,21 @@ public class RobotUtils {
              extension_up();
              outake_close();
          }
+    }
+
+    //Function that lowers the servo in time
+    public void startIntakeAuto(double power, double minPos, int duration, double step){
+         intake.setPower(power);
+         double currentPos = intake_extension.getPosition();
+         runtime3.reset();
+         while(currentPos > minPos){
+             runtime3.reset();
+             if(runtime3.milliseconds() >= duration){
+                 currentPos += step;
+                 intake_extension.setPosition(currentPos);
+             }
+         }
+
     }
 
     public void planeLaunch() {plane.setPosition(plane_launch_pos);}

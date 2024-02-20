@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.DARK.auto;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -339,7 +338,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 sleep(200);
                 drive.followTrajectorySequence(ciclu1stackc);
                 sleep(1000);
-                robot.stack1();
+                robot.startIntakeAuto(1, 0.05, 100, 0.01);
                 robot.stopIntakeAuto(1000);
                 robot.outake_close();
                 sleep(100);
