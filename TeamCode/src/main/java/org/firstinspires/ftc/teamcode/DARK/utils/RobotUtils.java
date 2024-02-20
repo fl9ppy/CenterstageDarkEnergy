@@ -143,7 +143,7 @@ public class RobotUtils {
     }
 
     public void stack1_2(){
-        intake_extension.setPosition(0.07);
+        intake_extension.setPosition(0.06);
         intake.setPower(-1);
     }
 
