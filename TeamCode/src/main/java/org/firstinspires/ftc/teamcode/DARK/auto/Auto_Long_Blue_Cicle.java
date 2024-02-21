@@ -316,6 +316,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 robot.stopIntakeAuto(1000);
                 robot.outake_close();
                 drive.followTrajectorySequence(ciclu1boardl);
+                robot.outake_open();
                 sleep(200);
                 drive.followTrajectorySequence(ciclu2druml);
                 sleep(100);
@@ -325,6 +326,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 robot.stopIntakeAuto(1000);
                 robot.outake_close();
                 drive.followTrajectorySequence(ciclu2boardl);
+                robot.outake_open();
                 sleep(200);
                 drive.followTrajectorySequence(parcarel);
                 break;
@@ -345,6 +347,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 robot.outake_close();
                 sleep(5000);
                 drive.followTrajectorySequence(ciclu1boardc);
+                robot.outake_open();
                 sleep(200);
                 drive.followTrajectorySequence(ciclu2drumc);
                 sleep(100);
@@ -355,6 +358,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 robot.outake_close();
                 sleep(5000);
                 drive.followTrajectorySequence(ciclu2boardc);
+                robot.outake_open();
                 sleep(200);
                 drive.followTrajectorySequence(parcarec);
                 break;
@@ -376,6 +380,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 robot.outake_close();
                 sleep(5000);
                 drive.followTrajectorySequence(ciclu1boardr);
+                robot.outake_open();
                 sleep(100);
                 drive.followTrajectorySequence(ciclu2drumr);
                 sleep(200);
@@ -385,7 +390,8 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 robot.outake_close();
                 sleep(5000);
                 drive.followTrajectorySequence(ciclu2boardr);
-                sleep(200);
+                robot.outake_open();
+                sleep(  100);
                 drive.followTrajectorySequence(parcarer);
                 break;
         }
