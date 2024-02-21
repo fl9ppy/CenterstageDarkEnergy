@@ -67,48 +67,47 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
 
 //              ------------right----------
         TrajectorySequence pixel1r = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-40,28, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-40,27, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence pedrumr = drive.trajectorySequenceBuilder(pixel1r.end())
                 .lineToLinearHeading(new Pose2d(-33,28, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(-33,8, Math.toRadians(180)))
                 .turn(Math.toRadians(180))
-                .lineToSplineHeading(new Pose2d(29,12, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(27,8, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence pixel2r = drive.trajectorySequenceBuilder(pedrumr.end())
                 .addTemporalMarker(0.2, ()->{robot.slider_up_preload();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .waitSeconds(0.5)
-                .splineToSplineHeading(new Pose2d(53,27, Math.toRadians(0)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(52,30, Math.toRadians(0)), Math.toRadians(90))
                 .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence ciclu1drumr = drive.trajectorySequenceBuilder(pixel2r.end())
-                .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
+                .addTemporalMarker(0.6, ()->{robot.axonDown(); robot.slider_down();})
                 .lineToLinearHeading(new Pose2d(45,27, Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(37,8, Math.toRadians(0)), Math.toRadians(-90))
                 .build();
 
         TrajectorySequence ciclu1stackr = drive.trajectorySequenceBuilder(ciclu1drumr.end())
-                .lineToSplineHeading(new Pose2d(-58,11, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(-59,10, Math.toRadians(0)))
+//                .addTemporalMarker(1, ()->{robot.inverse_intake_power();})
                 .build();
 
-        TrajectorySequence ciclu1boardr = drive.trajectorySequenceBuilder(ciclu1drumr.end())
+        TrajectorySequence ciclu1boardr = drive.trajectorySequenceBuilder(ciclu1stackr.end())
                 .lineToSplineHeading(new Pose2d(29,12, Math.toRadians(0)))
-                .addTemporalMarker(0.2, ()->{robot.slider_up();})
-                .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .splineToSplineHeading(new Pose2d(53,43, Math.toRadians(0)), Math.toRadians(90))
+                .addTemporalMarker(1.4, ()->{robot.slider_up();})
+                .addTemporalMarker(1.6, ()->{robot.axonUp();})
+                .splineToSplineHeading(new Pose2d(51,37, Math.toRadians(0)), Math.toRadians(90))
                 .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarer = drive.trajectorySequenceBuilder(ciclu1boardr.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(45,43, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(58,8, Math.toRadians(0)), Math.toRadians(0))
+                .lineToSplineHeading(new Pose2d(45,37, Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(58,12, Math.toRadians(0)), Math.toRadians(0))
                 .build();
-
 
 //              ------------center----------
         TrajectorySequence pixel1c = drive.trajectorySequenceBuilder(startPose)
@@ -164,40 +163,40 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
         TrajectorySequence pedruml = drive.trajectorySequenceBuilder(pixel1l.end())
                 .lineToLinearHeading(new Pose2d(-40,30, Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(-56,8,Math.toRadians(0)), Math.toRadians(-90))
-                .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(29,11, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence pixel2l = drive.trajectorySequenceBuilder(pedruml.end())
                 .addTemporalMarker(0.2, ()->{robot.slider_up_preload();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .waitSeconds(0.5)
-                .splineToSplineHeading(new Pose2d(53,47, Math.toRadians(0)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(51,47, Math.toRadians(0)), Math.toRadians(90))
                 .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence ciclu1druml = drive.trajectorySequenceBuilder(pixel2l.end())
-                .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(45,45, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(37,8, Math.toRadians(0)), Math.toRadians(-90))
+                .addTemporalMarker(0.6, ()->{robot.axonDown(); robot.slider_down();})
+                .lineToLinearHeading(new Pose2d(45,46, Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(37,9, Math.toRadians(0)), Math.toRadians(-90))
                 .build();
 
         TrajectorySequence ciclu1stackl = drive.trajectorySequenceBuilder(ciclu1druml.end())
-                .lineToSplineHeading(new Pose2d(-58,11, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(-59,9, Math.toRadians(0)))
+//                .addTemporalMarker(1, ()->{robot.inverse_intake_power();})
                 .build();
 
-        TrajectorySequence ciclu1boardl = drive.trajectorySequenceBuilder(ciclu1druml.end())
-                .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
-                .addTemporalMarker(0.2, ()->{robot.slider_up();})
-                .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .splineToSplineHeading(new Pose2d(53,47, Math.toRadians(0)), Math.toRadians(90))
+        TrajectorySequence ciclu1boardl = drive.trajectorySequenceBuilder(ciclu1stackl.end())
+                .lineToSplineHeading(new Pose2d(29,12, Math.toRadians(0)))
+                .addTemporalMarker(1.4, ()->{robot.slider_up();})
+                .addTemporalMarker(1.6, ()->{robot.axonUp();})
+                .splineToSplineHeading(new Pose2d(51,37, Math.toRadians(0)), Math.toRadians(90))
                 .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarel = drive.trajectorySequenceBuilder(ciclu1boardl.end())
-                .lineToLinearHeading(new Pose2d(45,47, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(58,8, Math.toRadians(0)), Math.toRadians(0))
+                .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
+                .lineToSplineHeading(new Pose2d(45,37, Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(58,12, Math.toRadians(0)), Math.toRadians(0))
                 .build();
-
 
         while (!isStarted() && !isStopRequested()) {
 
