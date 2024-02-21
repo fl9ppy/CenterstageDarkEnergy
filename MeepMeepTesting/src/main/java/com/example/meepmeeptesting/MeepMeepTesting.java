@@ -16,34 +16,22 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(90), 15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(10, 60, Math.toRadians(-90)))
+                        drive.trajectorySequenceBuilder(new Pose2d(-36, -60, Math.toRadians(90)))
                                 //preload
-                                .lineToLinearHeading(new Pose2d(13, 33, Math.toRadians(180)))
-                                .lineToLinearHeading(new Pose2d(4,33,Math.toRadians(180)))
-                                .turn(Math.toRadians(60))
+                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))
+                                .lineToSplineHeading(new Pose2d(-30, -28, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))
                                 //pedrum
-                                .lineToLinearHeading(new Pose2d(15, 33, Math.toRadians(180)))
-                                .turn(Math.toRadians(180))
+                                .splineToLinearHeading(new Pose2d(-40,-9, Math.toRadians(0)), Math.toRadians(0))
+                                .lineToSplineHeading(new Pose2d(40, -9, Math.toRadians(0)))
                                 //pixel1
-                                .lineToLinearHeading(new Pose2d(50,26, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(45,26, Math.toRadians(0)))
+
                                 //ciclu1
                                 //e micuta, e geloasa, tabla tiganeeeaascaaa
-                                .splineToSplineHeading(new Pose2d(37,60, Math.toRadians(0)), Math.toRadians(90))
-                                .lineToSplineHeading(new Pose2d(-36,60, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(-47, 34, Math.toRadians(0)))
-                                .lineToSplineHeading(new Pose2d(-59, 34, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(-47,34, Math.toRadians(0)))
-                                .splineToSplineHeading(new Pose2d(-36,60, Math.toRadians(0)), Math.toRadians(90))
-                                .lineToLinearHeading(new Pose2d(37,60, Math.toRadians(0)))
-                                .splineToSplineHeading(new Pose2d(45,40, Math.toRadians(0)), Math.toRadians(-90))
-                                .lineToLinearHeading(new Pose2d(52, 40,Math.toRadians(0)))
 
                                 //ciclu2
 ////                                //parcare
-                                .lineToLinearHeading(new Pose2d(45,40, Math.toRadians(0)))
-                                .splineToSplineHeading(new Pose2d(50,58, Math.toRadians(0)), Math.toRadians(0))
-                                .lineToSplineHeading(new Pose2d(58,58, Math.toRadians(0)))
+
 
                                 .build());
 

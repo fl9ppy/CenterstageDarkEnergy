@@ -70,7 +70,8 @@ public class Auto_long_red extends LinearOpMode {
         TrajectorySequence pixel1r = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))
                 .lineToSplineHeading(new Pose2d(-30, -28, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))                .build();
+                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))
+                .build();
 
         TrajectorySequence pedrumr = drive.trajectorySequenceBuilder(pixel1r.end())
                 .lineToLinearHeading(new Pose2d(-47, -8, Math.toRadians(0)))
