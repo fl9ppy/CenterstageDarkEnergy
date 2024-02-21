@@ -92,7 +92,6 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
 
         TrajectorySequence ciclu1stackr = drive.trajectorySequenceBuilder(ciclu1drumr.end())
                 .lineToSplineHeading(new Pose2d(-59,10, Math.toRadians(0)))
-//                .addTemporalMarker(1, ()->{robot.inverse_intake_power();})
                 .build();
 
         TrajectorySequence ciclu1boardr = drive.trajectorySequenceBuilder(ciclu1stackr.end())
@@ -136,7 +135,6 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
 
         TrajectorySequence ciclu1stackc = drive.trajectorySequenceBuilder(ciclu1drumc.end())
                 .lineToSplineHeading(new Pose2d(-59,10, Math.toRadians(0)))
-//                .addTemporalMarker(1, ()->{robot.inverse_intake_power();})
                 .build();
 
         TrajectorySequence ciclu1boardc = drive.trajectorySequenceBuilder(ciclu1stackc.end())
@@ -181,7 +179,6 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
 
         TrajectorySequence ciclu1stackl = drive.trajectorySequenceBuilder(ciclu1druml.end())
                 .lineToSplineHeading(new Pose2d(-59,9, Math.toRadians(0)))
-//                .addTemporalMarker(1, ()->{robot.inverse_intake_power();})
                 .build();
 
         TrajectorySequence ciclu1boardl = drive.trajectorySequenceBuilder(ciclu1stackl.end())
@@ -313,15 +310,6 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 drive.followTrajectorySequence(ciclu1boardr);
                 robot.outake_open();
                 sleep(100);
-//                drive.followTrajectorySequence(ciclu2stackc);
-//                sleep(1000);
-//                robot.startIntakeAuto(1, 0.05, 100, 0.01);
-//                robot.stopIntakeAuto(1000);
-//                robot.outake_close();
-//                sleep(5000);
-//                drive.followTrajectorySequence(ciclu2boardc);
-//                robot.outake_open();
-//                sleep(200);
                 drive.followTrajectorySequence(parcarer);
                 break;
         }
