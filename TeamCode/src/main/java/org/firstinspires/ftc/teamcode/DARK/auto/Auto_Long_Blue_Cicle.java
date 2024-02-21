@@ -67,14 +67,14 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
 
 //              ------------right----------
         TrajectorySequence pixel1r = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-40,30, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-40,28, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence pedrumr = drive.trajectorySequenceBuilder(pixel1r.end())
-                .lineToLinearHeading(new Pose2d(-33,30, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-33,28, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(-33,8, Math.toRadians(180)))
                 .turn(Math.toRadians(180))
-                .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(29,12, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence pixel2r = drive.trajectorySequenceBuilder(pedrumr.end())
@@ -96,7 +96,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .build();
 
         TrajectorySequence ciclu1boardr = drive.trajectorySequenceBuilder(ciclu1drumr.end())
-                .lineToSplineHeading(new Pose2d(38,8, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(29,12, Math.toRadians(0)))
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
                 .splineToSplineHeading(new Pose2d(53,43, Math.toRadians(0)), Math.toRadians(90))
@@ -136,7 +136,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .build();
 
         TrajectorySequence ciclu1stackc = drive.trajectorySequenceBuilder(ciclu1drumc.end())
-                .lineToSplineHeading(new Pose2d(-58,10, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(-59,10, Math.toRadians(0)))
 //                .addTemporalMarker(1, ()->{robot.inverse_intake_power();})
                 .build();
 
@@ -151,7 +151,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
         TrajectorySequence parcarec = drive.trajectorySequenceBuilder(ciclu1boardc.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
                 .lineToSplineHeading(new Pose2d(45,37, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(58,11, Math.toRadians(0)), Math.toRadians(0))
+                .splineToSplineHeading(new Pose2d(58,12, Math.toRadians(0)), Math.toRadians(0))
                 .build();
 
 
