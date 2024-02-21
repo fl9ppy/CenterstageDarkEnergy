@@ -22,7 +22,7 @@ public class RobotUtils {
     public static double outake_close = 0.25, outake_open = 0.43;
     public static double plane_launch_pos = 0.7, plane_armed_pos = 0;
     public static double axon_up_pos = 0.38, axon_down_pos = 0.0;
-    public static int slider_up1 = -800, slider_up2= 800, slider_down1 = 14, slider_down2 = -14;
+    public static int slider_up1 = -1100, slider_up2= 1100, slider_down1 = 14, slider_down2 = -14;
 
      public RobotUtils(HardwareMap hardwareMap){
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
@@ -106,6 +106,17 @@ public class RobotUtils {
         slider2.setPower(0.75);
     }
 
+    public void slider_up_preload(){
+        slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slider1.setTargetPosition(-800);
+        slider2.setTargetPosition(800);
+        slider1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slider2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slider1.setPower(-0.75);
+        slider2.setPower(0.75);
+    }
+
     public void slider_down(){
         slider1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slider2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -137,12 +148,12 @@ public class RobotUtils {
     //Only for auto
 
     public void stack1(){
-         intake_extension.setPosition(0.08);
+         intake_extension.setPosition(0.09);
          intake.setPower(-1);
     }
 
     public void stack1_2(){
-        intake_extension.setPosition(0.06);
+        intake_extension.setPosition(0.0);
         intake.setPower(-1);
     }
 
@@ -158,6 +169,10 @@ public class RobotUtils {
              extension_up();
              outake_close();
          }
+    }
+
+    public void stopIntake(){
+         intake.setPower(0);
     }
 
     //Function that lowers the servo in time
