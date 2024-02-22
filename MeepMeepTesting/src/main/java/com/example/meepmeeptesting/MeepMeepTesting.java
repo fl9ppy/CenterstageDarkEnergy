@@ -18,22 +18,37 @@ public class MeepMeepTesting {
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-36, -60, Math.toRadians(90)))
                                 //preload
-                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(180)))
-                                //pedrum
-                                .lineToLinearHeading(new Pose2d(-33,-30, Math.toRadians(180)))
-                                .lineToLinearHeading(new Pose2d(-33,-8, Math.toRadians(180)))
-                                .turn(Math.toRadians(180))
+                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))
+                                .lineToSplineHeading(new Pose2d(-30, -28, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))
+                                .splineToLinearHeading(new Pose2d(-40,-9, Math.toRadians(0)), Math.toRadians(0))
                                 .lineToSplineHeading(new Pose2d(40, -9, Math.toRadians(0)))
-                                //pixel1
-                                .splineToSplineHeading(new Pose2d(45,-27, Math.toRadians(0)), Math.toRadians(-90))
-                                .lineToLinearHeading(new Pose2d(52, -27,Math.toRadians(0)))
-                                //ciclu1
-                                .lineToLinearHeading(new Pose2d(45,-27, Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(45,-40, Math.toRadians(0)), Math.toRadians(-90))
+                                .lineToLinearHeading(new Pose2d(52, -40,Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(45,-40, Math.toRadians(0)))
                                 .splineToSplineHeading(new Pose2d(37,-9, Math.toRadians(0)), Math.toRadians(90))
                                 .lineToSplineHeading(new Pose2d(-58, -11, Math.toRadians(0)))
                                 .lineToSplineHeading(new Pose2d(40, -9, Math.toRadians(0)))
-                                .splineToSplineHeading(new Pose2d(45,-34, Math.toRadians(0)), Math.toRadians(-90))
-                                .lineToLinearHeading(new Pose2d(52, -34,Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(45,-35, Math.toRadians(0)), Math.toRadians(-90))
+                                .lineToLinearHeading(new Pose2d(52, -35,Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(45,-35, Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(58,-8, Math.toRadians(0)), Math.toRadians(0))
+//                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(180)))
+//                                //pedrum
+//                                .lineToLinearHeading(new Pose2d(-33,-30, Math.toRadians(180)))
+//                                .lineToLinearHeading(new Pose2d(-33,-8, Math.toRadians(180)))
+//                                .turn(Math.toRadians(180))
+//                                .lineToSplineHeading(new Pose2d(40, -9, Math.toRadians(0)))
+//                                //pixel1
+//                                .splineToSplineHeading(new Pose2d(45,-27, Math.toRadians(0)), Math.toRadians(-90))
+//                                .lineToLinearHeading(new Pose2d(52, -27,Math.toRadians(0)))
+//                                //ciclu1
+//                                .lineToLinearHeading(new Pose2d(45,-27, Math.toRadians(0)))
+//                                .splineToSplineHeading(new Pose2d(37,-9, Math.toRadians(0)), Math.toRadians(90))
+//                                .lineToSplineHeading(new Pose2d(-58, -11, Math.toRadians(0)))
+//                                .lineToSplineHeading(new Pose2d(40, -9, Math.toRadians(0)))
+//                                .splineToSplineHeading(new Pose2d(45,-34, Math.toRadians(0)), Math.toRadians(-90))
+//                                .lineToLinearHeading(new Pose2d(52, -34,Math.toRadians(0)))
 
 
                                 //e micuta, e geloasa, tabla tiganeeeaascaaa

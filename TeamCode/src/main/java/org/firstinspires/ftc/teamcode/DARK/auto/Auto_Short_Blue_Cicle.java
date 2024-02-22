@@ -75,23 +75,21 @@ public class Auto_Short_Blue_Cicle extends LinearOpMode {
                 .build();
 
         TrajectorySequence pedrumr = drive.trajectorySequenceBuilder(pixel1r.end())
-                .lineToLinearHeading(new Pose2d(15, 33, Math.toRadians(180)))
+                .lineToSplineHeading(new Pose2d(15, 33, Math.toRadians(180)))
                 .turn(Math.toRadians(180))
                 .build();
 
         TrajectorySequence pixel2r = drive.trajectorySequenceBuilder(pedrumr.end())
-                .addTemporalMarker(0.2, ()->{robot.slider_up();})
+                .addTemporalMarker(0.2, ()->{robot.slider_up_preload();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .lineToLinearHeading(new Pose2d(50,25, Math.toRadians(0)))
-                .waitSeconds(0.200)
+                .splineToLinearHeading(new Pose2d(50,25, Math.toRadians(0)), Math.toRadians(0))
                 .build();
 
         TrajectorySequence ciclu1drumr = drive.trajectorySequenceBuilder(pixel2r.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(45,25, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(45,25, Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(37,56, Math.toRadians(0)), Math.toRadians(90))
                 .lineToSplineHeading(new Pose2d(-36,56, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-47, 34, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence ciclu1stackr = drive.trajectorySequenceBuilder(ciclu1drumr.end())
@@ -99,16 +97,15 @@ public class Auto_Short_Blue_Cicle extends LinearOpMode {
                 .build();
 
         TrajectorySequence ciclu1druminapoir = drive.trajectorySequenceBuilder(ciclu1stackr.end())
-                .lineToLinearHeading(new Pose2d(-55,31, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(-42,57, Math.toRadians(0)), Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(37,57, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(-56,31, Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(-42,57, Math.toRadians(0)), Math.toRadians(0))
+                .lineToSplineHeading(new Pose2d(37,56, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence ciclu1boardr = drive.trajectorySequenceBuilder(ciclu1druminapoir.end())
-                .splineToSplineHeading(new Pose2d(45,31, Math.toRadians(0)), Math.toRadians(-90))
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.4, ()->{robot.axonUp();})
-                .lineToLinearHeading(new Pose2d(52, 31,Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(52,31, Math.toRadians(0)), Math.toRadians(-90))
                 .build();
 
         TrajectorySequence parcarer = drive.trajectorySequenceBuilder(ciclu1boardr.end())
@@ -306,23 +303,18 @@ public class Auto_Short_Blue_Cicle extends LinearOpMode {
                 drive.followTrajectorySequence(pixel1r);
                 drive.followTrajectorySequence(pedrumr);
                 drive.followTrajectorySequence(pixel2r);
-                sleep(50);
                 robot.outake_open();
-                sleep(50);
                 drive.followTrajectorySequence(ciclu1drumr);
                 drive.followTrajectorySequence(ciclu1stackr);
-                sleep(100);
                 robot.stack1();
                 robot.inverse_intake_power();
-                sleep(3000);
+                sleep(2500);
                 robot.outake_close();
                 robot.stopIntake();
                 robot.extension_up();
                 drive.followTrajectorySequence(ciclu1druminapoir);
-                sleep(50);
                 drive.followTrajectorySequence(ciclu1boardr);
                 robot.outake_open();
-                sleep(50);
                 drive.followTrajectorySequence(parcarer);
                 break;
         }
