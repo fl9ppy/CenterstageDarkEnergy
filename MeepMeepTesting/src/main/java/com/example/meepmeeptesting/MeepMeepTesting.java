@@ -3,10 +3,7 @@ package com.example.meepmeeptesting;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
-import com.noahbres.meepmeep.roadrunner.SampleMecanumDrive;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
-
-import java.nio.file.attribute.PosixFileAttributes;
 
 public class MeepMeepTesting {
     public static void main(String[] args) {
@@ -18,20 +15,19 @@ public class MeepMeepTesting {
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-36, -60, Math.toRadians(90)))
                                 //preload
-                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))
-                                .lineToSplineHeading(new Pose2d(-30, -28, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(0)))
-                                .splineToLinearHeading(new Pose2d(-40,-9, Math.toRadians(0)), Math.toRadians(0))
+                                .lineToLinearHeading(new Pose2d(-36, -27, Math.toRadians(90)))
+                                .lineToSplineHeading(new Pose2d(-36, -37, Math.toRadians(90)))
+                                .lineToLinearHeading(new Pose2d(-45, -37, Math.toRadians(90)))
+                                .splineToSplineHeading(new Pose2d(-54,-8,Math.toRadians(0)), Math.toRadians(90))
                                 .lineToSplineHeading(new Pose2d(40, -9, Math.toRadians(0)))
-                                .splineToSplineHeading(new Pose2d(45,-40, Math.toRadians(0)), Math.toRadians(-90))
-                                .lineToLinearHeading(new Pose2d(52, -40,Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(45,-40, Math.toRadians(0)))
-                                .splineToSplineHeading(new Pose2d(37,-9, Math.toRadians(0)), Math.toRadians(90))
-                                .lineToSplineHeading(new Pose2d(-58, -11, Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(45,-34, Math.toRadians(0)), Math.toRadians(-90))
+                                .lineToLinearHeading(new Pose2d(52, -34,Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(45,-34, Math.toRadians(0)))
+                                .splineToSplineHeading(new Pose2d(37,-4, Math.toRadians(0)), Math.toRadians(90))
+                                .lineToSplineHeading(new Pose2d(-58, -4, Math.toRadians(0)))
                                 .lineToSplineHeading(new Pose2d(40, -9, Math.toRadians(0)))
-                                .splineToSplineHeading(new Pose2d(45,-35, Math.toRadians(0)), Math.toRadians(-90))
-                                .lineToLinearHeading(new Pose2d(52, -35,Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(45,-35, Math.toRadians(0)))
+                                .lineToSplineHeading(new Pose2d(52,-42, Math.toRadians(0)))
+                                .lineToSplineHeading(new Pose2d(45,-42, Math.toRadians(0)))
                                 .splineToSplineHeading(new Pose2d(58,-8, Math.toRadians(0)), Math.toRadians(0))
 //                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(180)))
 //                                //pedrum

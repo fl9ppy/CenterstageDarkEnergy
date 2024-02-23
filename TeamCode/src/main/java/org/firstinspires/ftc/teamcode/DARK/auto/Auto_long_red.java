@@ -7,10 +7,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.DARK.detection.DetectionPipeline;
-import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.DARK.utils.RobotUtils;
+import org.firstinspires.ftc.teamcode.DARK.utils.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -96,7 +95,8 @@ public class Auto_long_red extends LinearOpMode {
 
 //              ------------center----------
         TrajectorySequence pixel1c = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-42, -16, Math.toRadians(0)))                .build();
+                .lineToLinearHeading(new Pose2d(-42, -16, Math.toRadians(0)))
+                .build();
 
         TrajectorySequence pedrumc = drive.trajectorySequenceBuilder(pixel1c.end())
                 .lineToLinearHeading(new Pose2d(-56, -15, Math.toRadians(0)))
@@ -105,7 +105,8 @@ public class Auto_long_red extends LinearOpMode {
                 .build();
 
         TrajectorySequence pixel2c = drive.trajectorySequenceBuilder(pedrumc.end())
-                .lineToLinearHeading(new Pose2d(47,-27, Math.toRadians(0)))                .addTemporalMarker(0.2, ()->{robot.slider_up();})
+                .lineToLinearHeading(new Pose2d(47,-27, Math.toRadians(0)))
+                .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
                 .waitSeconds(0.5)
                 .lineToLinearHeading(new Pose2d(54,-27, Math.toRadians(0)))
