@@ -26,9 +26,9 @@ public class MeepMeepTesting {
                                 .splineToSplineHeading(new Pose2d(37,-4, Math.toRadians(0)), Math.toRadians(90))
                                 .lineToSplineHeading(new Pose2d(-58, -4, Math.toRadians(0)))
                                 .lineToSplineHeading(new Pose2d(40, -9, Math.toRadians(0)))
-                                .lineToSplineHeading(new Pose2d(52,-42, Math.toRadians(0)))
+                                .splineToLinearHeading(new Pose2d(52,-42, Math.toRadians(0)), Math.toRadians(90))
                                 .lineToSplineHeading(new Pose2d(45,-42, Math.toRadians(0)))
-                                .splineToSplineHeading(new Pose2d(58,-8, Math.toRadians(0)), Math.toRadians(0))
+                                .splineToLinearHeading(new Pose2d(58,-8, Math.toRadians(0)), Math.toRadians(0))
 //                                .lineToLinearHeading(new Pose2d(-40,-30, Math.toRadians(180)))
 //                                //pedrum
 //                                .lineToLinearHeading(new Pose2d(-33,-30, Math.toRadians(180)))

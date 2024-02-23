@@ -22,7 +22,7 @@ public class RobotUtils {
     public static double outake_close = 0.25, outake_open = 0.43;
     public static double plane_launch_pos = 0.7, plane_armed_pos = 0;
     public static double axon_up_pos = 0.38, axon_down_pos = 0.0;
-    public static int slider_up1 = -1100, slider_up2= 1100, slider_down1 = 14, slider_down2 = -14;
+    public static int slider_up1 = -1000, slider_up2= 1000, slider_down1 = 14, slider_down2 = -14;
 
      public RobotUtils(HardwareMap hardwareMap){
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
@@ -148,7 +148,7 @@ public class RobotUtils {
     //Only for auto
 
     public void stack1(){
-         intake_extension.setPosition(0.09);
+         intake_extension.setPosition(0.08);
          intake.setPower(-1);
     }
 
