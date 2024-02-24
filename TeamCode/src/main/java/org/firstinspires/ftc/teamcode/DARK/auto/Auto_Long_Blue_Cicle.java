@@ -123,13 +123,13 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
         TrajectorySequence pixel2c = drive.trajectorySequenceBuilder(pedrumc.end())
                 .addTemporalMarker(0.2, ()->{robot.slider_up_preload();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .splineToSplineHeading(new Pose2d(53,42, Math.toRadians(0)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(53,35, Math.toRadians(0)), Math.toRadians(90))
                 .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence ciclu1drumc = drive.trajectorySequenceBuilder(pixel2c.end())
                 .addTemporalMarker(0.6, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(45,42, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,35, Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(37,9, Math.toRadians(0)), Math.toRadians(-90))
                 .build();
 
@@ -141,13 +141,13 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(29,12, Math.toRadians(0)))
                 .addTemporalMarker(1.4, ()->{robot.slider_up();})
                 .addTemporalMarker(1.6, ()->{robot.axonUp();})
-                .splineToSplineHeading(new Pose2d(51,37, Math.toRadians(0)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(51,30, Math.toRadians(0)), Math.toRadians(90))
                 .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarec = drive.trajectorySequenceBuilder(ciclu1boardc.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToSplineHeading(new Pose2d(45,37, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(45,30, Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(58,12, Math.toRadians(0)), Math.toRadians(0))
                 .build();
 
@@ -167,44 +167,45 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
         TrajectorySequence pixel2l = drive.trajectorySequenceBuilder(pedruml.end())
                 .addTemporalMarker(0.2, ()->{robot.slider_up_preload();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .splineToSplineHeading(new Pose2d(51,47, Math.toRadians(0)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(51,30, Math.toRadians(0)), Math.toRadians(90))
                 .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence ciclu1druml = drive.trajectorySequenceBuilder(pixel2l.end())
                 .addTemporalMarker(0.6, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(45,46, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,30, Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(37,9, Math.toRadians(0)), Math.toRadians(-90))
                 .build();
 
         TrajectorySequence ciclu1stackl = drive.trajectorySequenceBuilder(ciclu1druml.end())
-                .lineToSplineHeading(new Pose2d(-59,9, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(-58,10, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence ciclu1boardl = drive.trajectorySequenceBuilder(ciclu1stackl.end())
                 .lineToSplineHeading(new Pose2d(29,12, Math.toRadians(0)))
                 .addTemporalMarker(1.4, ()->{robot.slider_up();})
                 .addTemporalMarker(1.6, ()->{robot.axonUp();})
-                .splineToSplineHeading(new Pose2d(51,37, Math.toRadians(0)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(51,38, Math.toRadians(0)), Math.toRadians(90))
                 .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarel = drive.trajectorySequenceBuilder(ciclu1boardl.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToSplineHeading(new Pose2d(45,37, Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(45,38, Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(58,12, Math.toRadians(0)), Math.toRadians(0))
                 .build();
-
         while (!isStarted() && !isStopRequested()) {
 
-            double zoneright = detectionPipeline.getZoneLuminosity(85);
-            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(34)
-                                    ,detectionPipeline.getZoneLuminosity(35))
-                            ,detectionPipeline.getZoneLuminosity(24))
-                    ,detectionPipeline.getZoneLuminosity(25));
+            double zoneright = detectionPipeline.getZoneLuminosity(65);
+            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(15)
+                                    ,detectionPipeline.getZoneLuminosity(25))
+                            ,detectionPipeline.getZoneLuminosity(16))
+                    ,detectionPipeline.getZoneLuminosity(26));
 
-            if (zoneright<zonemid && zoneright<80) zone = ZoneType.RIGHT;
-            else if (zonemid < zoneright && zonemid<80)zone = ZoneType.CENTER;
+            if(Math.abs(zoneright - zonemid) > 30){
+                if(zonemid<zoneright) zone = ZoneType.CENTER;
+                else if(zoneright<zonemid) zone = ZoneType.RIGHT;
+            }
             else zone = ZoneType.LEFT;
 
             telemetry.addData("zone = ",zone.toString());
@@ -246,7 +247,7 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 sleep(200);
                 robot.stack1();
                 robot.inverse_intake_power();
-                sleep(3000);
+                sleep(2900);
                 robot.outake_close();
                 robot.stopIntake();
                 robot.extension_up();
@@ -270,13 +271,13 @@ public class Auto_Long_Blue_Cicle extends LinearOpMode {
                 sleep(200);
                 robot.stack1();
                 robot.inverse_intake_power();
-                sleep(3000);
+                sleep(2900);
                 robot.outake_close();
                 robot.stopIntake();
                 robot.extension_up();
                 drive.followTrajectorySequence(ciclu1boardc);
                 robot.outake_open();
-                sleep(100);
+                sleep(200);
 //                drive.followTrajectorySequence(ciclu2stackc);
 //                sleep(1000);
 //                robot.startIntakeAuto(1, 0.05, 100, 0.01);

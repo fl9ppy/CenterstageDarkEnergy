@@ -19,7 +19,6 @@ public class DriveDark extends LinearOpMode {
     private static final double DRIVE_SCALE = 1.7, TURBO_SCALE = 1, PRECISION_SCALE = 4;
     boolean buttonWasPressed = false;
     int cnt = 0;
-    public static double loopTime = 0;
 
     enum Modedrive {
         DRIVER_CONTROL,
@@ -138,16 +137,6 @@ public class DriveDark extends LinearOpMode {
             if (cnt == 5) {
                 robot.intake_extension.setPosition(0);
                 cnt = 0;
-            }
-
-            /*-------------------------BOTH-------------------------*/
-
-            //Pixel detection
-
-            if(robot.hasDetected()){
-                gamepad1.rumble(500);
-                gamepad2.rumble(500);
-                if(robot.slider2.getCurrentPosition() >= 100 && robot.slider2.getCurrentPosition() <= 150) robot.outake_close();
             }
         }
     }

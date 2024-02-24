@@ -122,90 +122,86 @@ public class Auto_Short_Red_Cicle extends LinearOpMode {
                 .build();
 
         TrajectorySequence pedrumc = drive.trajectorySequenceBuilder(pixel1c.end())
-                .lineToLinearHeading(new Pose2d(10,-38, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(10,-34, Math.toRadians(-90)))
                 .turn(Math.toRadians(90))
                 .build();
 
         TrajectorySequence pixel2c = drive.trajectorySequenceBuilder(pedrumc.end())
                 .addTemporalMarker(0.2, ()->{robot.slider_up_preload();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .lineToLinearHeading(new Pose2d(51,-34, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(51,-36, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence ciclu1drumc = drive.trajectorySequenceBuilder(pixel2r.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(45,-26, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(37,-56, Math.toRadians(0)), Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(37,-56, Math.toRadians(0)), Math.toRadians(90))
                 .lineToSplineHeading(new Pose2d(-36,-56, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-47, -34, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence ciclu1stackc = drive.trajectorySequenceBuilder(ciclu1drumc.end())
-                .lineToLinearHeading(new Pose2d(-61, -31, Math.toRadians(0)))
+                .splineToLinearHeading(new Pose2d(-61, -31, Math.toRadians(0)), Math.toRadians(0))
                 .build();
 
         TrajectorySequence ciclu1druminapoic = drive.trajectorySequenceBuilder(ciclu1stackc.end())
-                .lineToLinearHeading(new Pose2d(-55,-31, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(-42,-56, Math.toRadians(0)), Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(37,-56, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-56,-31, Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(-42,-57, Math.toRadians(0)), Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(37,-56, Math.toRadians(0)), Math.toRadians(0))
                 .build();
 
         TrajectorySequence ciclu1boardc = drive.trajectorySequenceBuilder(ciclu1druminapoic.end())
-                .splineToSplineHeading(new Pose2d(45,-40, Math.toRadians(0)), Math.toRadians(-90))
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
-                .addTemporalMarker(0.4, ()->{robot.axonUp();})
-                .lineToLinearHeading(new Pose2d(52, -37,Math.toRadians(0)))
+                .addTemporalMarker(0.3, ()->{robot.axonUp();})
+                .lineToLinearHeading(new Pose2d(51,-36, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence parcarec = drive.trajectorySequenceBuilder(ciclu1boardr.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(45,-40, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,-36, Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(50,-58, Math.toRadians(0)), Math.toRadians(0))
                 .lineToSplineHeading(new Pose2d(58,-58, Math.toRadians(0)))
                 .build();
 
         ///     ------------left----------
         TrajectorySequence pixel1l = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(10, -36, Math.toRadians(-90)))
-                .lineToLinearHeading(new Pose2d(25,-36, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(13, -33, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(4,-33,Math.toRadians(180)))
+                .turn(Math.toRadians(60))
                 .build();
 
         TrajectorySequence pedruml = drive.trajectorySequenceBuilder(pixel1l.end())
-                .lineToLinearHeading(new Pose2d(25,-49, Math.toRadians(-90)))
-                .turn(Math.toRadians(90))
+                .lineToSplineHeading(new Pose2d(15, -33, Math.toRadians(180)))
+                .turn(Math.toRadians(180))
                 .build();
 
         TrajectorySequence pixel2l = drive.trajectorySequenceBuilder(pedruml.end())
                 .addTemporalMarker(0.2, ()->{robot.slider_up_preload();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .lineToLinearHeading(new Pose2d(52,-37, Math.toRadians(0)))
+                .splineToLinearHeading(new Pose2d(50,-25, Math.toRadians(0)), Math.toRadians(0))
                 .waitSeconds(0.200)
                 .build();
 
 
         TrajectorySequence ciclu1druml = drive.trajectorySequenceBuilder(pixel2l.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
-                .lineToLinearHeading(new Pose2d(45,-26, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(37,-56, Math.toRadians(0)), Math.toRadians(90))
+                .lineToSplineHeading(new Pose2d(45,-25, Math.toRadians(0)))
+                .splineToLinearHeading(new Pose2d(37,-56, Math.toRadians(0)), Math.toRadians(90))
                 .lineToSplineHeading(new Pose2d(-36,-56, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-47, -34, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence ciclu1stackl = drive.trajectorySequenceBuilder(ciclu1druml.end())
-                .lineToLinearHeading(new Pose2d(-61, -31, Math.toRadians(0)))
+                .splineToLinearHeading(new Pose2d(-61, -31, Math.toRadians(0)), Math.toRadians(0))
                 .build();
 
         TrajectorySequence ciclu1druminapoil = drive.trajectorySequenceBuilder(ciclu1stackl.end())
-                .lineToLinearHeading(new Pose2d(-55,-31, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(-42,-57, Math.toRadians(0)), Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(37,-57, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-56,-31, Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(-42,-57, Math.toRadians(0)), Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(37,-56, Math.toRadians(0)), Math.toRadians(0))
                 .build();
 
         TrajectorySequence ciclu1boardl = drive.trajectorySequenceBuilder(ciclu1druminapoil.end())
-                .splineToSplineHeading(new Pose2d(45,-31, Math.toRadians(0)), Math.toRadians(-90))
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.4, ()->{robot.axonUp();})
-                .lineToLinearHeading(new Pose2d(52, -31,Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(52,-31, Math.toRadians(0)), Math.toRadians(90))
                 .build();
 
         TrajectorySequence parcarel = drive.trajectorySequenceBuilder(ciclu1boardl.end())
@@ -218,14 +214,16 @@ public class Auto_Short_Red_Cicle extends LinearOpMode {
 
         while (!isStarted() && !isStopRequested()) {
 
-            double zoneright = detectionPipeline.getZoneLuminosity(85);
-            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(34)
-                                    ,detectionPipeline.getZoneLuminosity(35))
-                            ,detectionPipeline.getZoneLuminosity(24))
-                    ,detectionPipeline.getZoneLuminosity(25));
+            double zoneright = detectionPipeline.getZoneLuminosity(66);
+            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(15)
+                                    ,detectionPipeline.getZoneLuminosity(25))
+                            ,detectionPipeline.getZoneLuminosity(16))
+                    ,detectionPipeline.getZoneLuminosity(26));
 
-            if (zoneright<zonemid && zoneright<112) zone = ZoneType.RIGHT;
-            else if (zonemid < zoneright && zonemid<80)zone = ZoneType.CENTER;
+            if(Math.abs(zoneright - zonemid) > 30){
+                if(zonemid>zoneright) zone = ZoneType.CENTER;
+                else if(zoneright > zonemid) zone = ZoneType.RIGHT;
+            }
             else zone = ZoneType.LEFT;
 
             telemetry.addData("zone = ",zone.toString());
