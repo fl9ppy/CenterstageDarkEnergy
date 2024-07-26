@@ -211,13 +211,13 @@ public class Auto_Long_Red_Cicle extends LinearOpMode {
                                     ,detectionPipeline.getZoneLuminosity(86))
                             ,detectionPipeline.getZoneLuminosity(77))
                     ,detectionPipeline.getZoneLuminosity(87));
-            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(26)
-                                    ,detectionPipeline.getZoneLuminosity(36))
-                            ,detectionPipeline.getZoneLuminosity(27))
-                    ,detectionPipeline.getZoneLuminosity(37));
+            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(16)
+                                    ,detectionPipeline.getZoneLuminosity(26))
+                            ,detectionPipeline.getZoneLuminosity(17))
+                    ,detectionPipeline.getZoneLuminosity(27));
 
             if(Math.abs(zoneright - zonemid) > 30){
-                if(zonemid<zoneright) zone = ZoneType.CENTER;
+                if(zonemid<zoneright) zone =ZoneType.CENTER;
                 else if(zoneright<zonemid) zone = ZoneType.RIGHT;
             }
             else zone = ZoneType.LEFT;
@@ -253,19 +253,19 @@ public class Auto_Long_Red_Cicle extends LinearOpMode {
                 sleep(100);
                 drive.followTrajectorySequence(pixel2l);
                 sleep(200);
-                robot.outake_open();
-                sleep(100);
-                drive.followTrajectorySequence(ciclu1druml);
-                sleep(100);
-                drive.followTrajectorySequence(ciclu1stackl);
-                sleep(200);
-                robot.stack1();
-                robot.inverse_intake_power();
-                sleep(3000);
-                robot.outake_close();
-                robot.stopIntake();
-                robot.extension_up();
-                drive.followTrajectorySequence(ciclu1boardl);
+//                robot.outake_open();
+//                sleep(100);
+//                drive.followTrajectorySequence(ciclu1druml);
+//                sleep(100);
+//                drive.followTrajectorySequence(ciclu1stackl);
+//                sleep(200);
+//                robot.stack1();
+//                robot.inverse_intake_power();
+//                sleep(3000);
+//                robot.outake_close();
+//                robot.stopIntake();
+//                robot.extension_up();
+//                drive.followTrajectorySequence(ciclu1boardl);
                 robot.outake_open();
                 sleep(200);
                 drive.followTrajectorySequence(parcarel);
@@ -274,19 +274,19 @@ public class Auto_Long_Red_Cicle extends LinearOpMode {
                 drive.followTrajectorySequence(pedrumc);
                 drive.followTrajectorySequence(pixel2c);
                 robot.outake_open();
-                drive.followTrajectorySequence(ciclu1drumc);
-                drive.followTrajectorySequence(ciclu1stackc);
-                sleep(200);
-                robot.stack1();
-                robot.inverse_intake_power();
-                sleep(3000);
-                robot.outake_close();
-                robot.stopIntake();
-                robot.extension_up();
-                drive.followTrajectorySequence(ciclu1boardc);
-                sleep(100);
-                robot.outake_open();
-                sleep(200);
+//                drive.followTrajectorySequence(ciclu1drumc);
+//                drive.followTrajectorySequence(ciclu1stackc);
+//                sleep(200);
+//                robot.stack1();
+//                robot.inverse_intake_power();
+//                sleep(3000);
+//                robot.outake_close();
+//                robot.stopIntake();
+//                robot.extension_up();
+//                drive.followTrajectorySequence(ciclu1boardc);
+//                sleep(100);
+//                robot.outake_open();
+//                sleep(200);
 //                drive.followTrajectorySequence(ciclu2stackc);
 //                sleep(1000);
 //                robot.startIntakeAuto(1, 0.05, 100, 0.01);
@@ -305,19 +305,19 @@ public class Auto_Long_Red_Cicle extends LinearOpMode {
                 sleep(100);
                 drive.followTrajectorySequence(pixel2r);
                 sleep(100);
-                robot.outake_open();
-                sleep(200);
-                drive.followTrajectorySequence(ciclu1drumr);
-                sleep(100);
-                drive.followTrajectorySequence(ciclu1stackr);
-                sleep(200);
-                robot.stack1();
-                robot.inverse_intake_power();
-                sleep(3000);
-                robot.outake_close();
-                robot.stopIntake();
-                robot.extension_up();
-                drive.followTrajectorySequence(ciclu1boardr);
+//                robot.outake_open();
+//                sleep(200);
+//                drive.followTrajectorySequence(ciclu1drumr);
+//                sleep(100);
+//                drive.followTrajectorySequence(ciclu1stackr);
+//                sleep(200);
+//                robot.stack1();
+//                robot.inverse_intake_power();
+//                sleep(3000);
+//                robot.outake_close();
+//                robot.stopIntake();
+//                robot.extension_up();
+//                drive.followTrajectorySequence(ciclu1boardr);
                 robot.outake_open();
                 sleep(100);
                 drive.followTrajectorySequence(parcarer);

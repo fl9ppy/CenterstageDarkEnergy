@@ -105,11 +105,11 @@ public class Auto_long_red extends LinearOpMode {
                 .build();
 
         TrajectorySequence pixel2c = drive.trajectorySequenceBuilder(pedrumc.end())
-                .lineToLinearHeading(new Pose2d(47,-27, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47,-34, Math.toRadians(0)))
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
                 .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(54,-27, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(54,-34, Math.toRadians(0)))
                 .waitSeconds(0.200)
                 .build();
 

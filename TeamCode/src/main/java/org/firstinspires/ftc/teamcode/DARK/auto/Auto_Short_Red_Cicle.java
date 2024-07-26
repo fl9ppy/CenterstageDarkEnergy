@@ -214,17 +214,20 @@ public class Auto_Short_Red_Cicle extends LinearOpMode {
 
         while (!isStarted() && !isStopRequested()) {
 
-            double zoneright = detectionPipeline.getZoneLuminosity(66);
-            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(15)
-                                    ,detectionPipeline.getZoneLuminosity(25))
-                            ,detectionPipeline.getZoneLuminosity(16))
-                    ,detectionPipeline.getZoneLuminosity(26));
+            double zoneright = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(76)
+                                    ,detectionPipeline.getZoneLuminosity(86))
+                            ,detectionPipeline.getZoneLuminosity(77))
+                    ,detectionPipeline.getZoneLuminosity(87));
+            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(16)
+                                    ,detectionPipeline.getZoneLuminosity(26))
+                            ,detectionPipeline.getZoneLuminosity(17))
+                    ,detectionPipeline.getZoneLuminosity(27));
 
             if(Math.abs(zoneright - zonemid) > 30){
-                if(zonemid>zoneright) zone = ZoneType.CENTER;
-                else if(zoneright > zonemid) zone = ZoneType.RIGHT;
+                if(zonemid<zoneright) zone = ZoneType.CENTER;
+                else if(zoneright<zonemid) zone =ZoneType.RIGHT;
             }
-            else zone = ZoneType.LEFT;
+            else zone =ZoneType.LEFT;
 
             telemetry.addData("zone = ",zone.toString());
             telemetry.addData("luminosity zone right",zoneright);
@@ -254,17 +257,17 @@ public class Auto_Short_Red_Cicle extends LinearOpMode {
                 drive.followTrajectorySequence(pixel1r);
                 drive.followTrajectorySequence(pedrumr);
                 drive.followTrajectorySequence(pixel2r);
-                robot.outake_open();
-                drive.followTrajectorySequence(ciclu1drumr);
-                drive.followTrajectorySequence(ciclu1stackr);
-                robot.stack1();
-                robot.inverse_intake_power();
-                sleep(2500);
-                robot.outake_close();
-                robot.stopIntake();
-                robot.extension_up();
-                drive.followTrajectorySequence(ciclu1druminapoir);
-                drive.followTrajectorySequence(ciclu1boardr);
+//                robot.outake_open();
+//                drive.followTrajectorySequence(ciclu1drumr);
+//                drive.followTrajectorySequence(ciclu1stackr);
+//                robot.stack1();
+//                robot.inverse_intake_power();
+//                sleep(2500);
+//                robot.outake_close();
+//                robot.stopIntake();
+//                robot.extension_up();
+//                drive.followTrajectorySequence(ciclu1druminapoir);
+//                drive.followTrajectorySequence(ciclu1boardr);
                 robot.outake_open();
                 drive.followTrajectorySequence(parcarer);
                 break;
@@ -274,19 +277,19 @@ public class Auto_Short_Red_Cicle extends LinearOpMode {
                 drive.followTrajectorySequence(pedrumc);
                 drive.followTrajectorySequence(pixel2c);
                 sleep(50);
-                robot.outake_open();
-                sleep(100);
-                drive.followTrajectorySequence(ciclu1drumc);
-                drive.followTrajectorySequence(ciclu1stackc);
-                sleep(50);
-                robot.stack1();
-                robot.inverse_intake_power();
-                sleep(3000);
-                robot.outake_close();
-                robot.stopIntake();
-                robot.extension_up();
-                drive.followTrajectorySequence(ciclu1druminapoic);
-                drive.followTrajectorySequence(ciclu1boardc);
+//                robot.outake_open();
+//                sleep(100);
+//                drive.followTrajectorySequence(ciclu1drumc);
+//                drive.followTrajectorySequence(ciclu1stackc);
+//                sleep(50);
+//                robot.stack1();
+//                robot.inverse_intake_power();
+//                sleep(3000);
+//                robot.outake_close();
+//                robot.stopIntake();
+//                robot.extension_up();
+//                drive.followTrajectorySequence(ciclu1druminapoic);
+//                drive.followTrajectorySequence(ciclu1boardc);
                 robot.outake_open();
                 sleep(100);
                 drive.followTrajectorySequence(parcarec);
@@ -298,19 +301,19 @@ public class Auto_Short_Red_Cicle extends LinearOpMode {
             sleep(50);
             drive.followTrajectorySequence(pixel2l);
             sleep(100);
-            robot.outake_open();
-            sleep(50);
-            drive.followTrajectorySequence(ciclu1druml);
-            drive.followTrajectorySequence(ciclu1stackl);
-            sleep(100);
-            robot.stack1();
-            robot.inverse_intake_power();
-            sleep(3000);
-            robot.outake_close();
-            robot.stopIntake();
-            robot.extension_up();
-            drive.followTrajectorySequence(ciclu1druminapoil);
-            drive.followTrajectorySequence(ciclu1boardl);
+//            robot.outake_open();
+//            sleep(50);
+//            drive.followTrajectorySequence(ciclu1druml);
+//            drive.followTrajectorySequence(ciclu1stackl);
+//            sleep(100);
+//            robot.stack1();
+//            robot.inverse_intake_power();
+//            sleep(3000);
+//            robot.outake_close();
+//            robot.stopIntake();
+//            robot.extension_up();
+//            drive.followTrajectorySequence(ciclu1druminapoil);
+//            drive.followTrajectorySequence(ciclu1boardl);
             robot.outake_open();
             sleep(100);
             drive.followTrajectorySequence(parcarel);

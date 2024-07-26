@@ -81,9 +81,7 @@ public class Auto_short_blue extends LinearOpMode {
         TrajectorySequence pixel2r = drive.trajectorySequenceBuilder(pedrumr.end())
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .waitSeconds(0.5)
                 .lineToLinearHeading(new Pose2d(50,26, Math.toRadians(0)))
-                .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarer = drive.trajectorySequenceBuilder(pixel2r.end())
@@ -107,9 +105,7 @@ public class Auto_short_blue extends LinearOpMode {
         TrajectorySequence pixel2c = drive.trajectorySequenceBuilder(pedrumc.end())
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .waitSeconds(0.5)
                 .lineToLinearHeading(new Pose2d(51,34, Math.toRadians(0)))
-                .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarec = drive.trajectorySequenceBuilder(pixel2c.end())
@@ -134,9 +130,7 @@ public class Auto_short_blue extends LinearOpMode {
         TrajectorySequence pixel2l = drive.trajectorySequenceBuilder(pedruml.end())
                 .addTemporalMarker(0.3, ()->{robot.slider_up();})
                 .addTemporalMarker(0.4, ()->{robot.axonUp();})
-                .waitSeconds(0.5)
                 .lineToLinearHeading(new Pose2d(52,38, Math.toRadians(0)))
-                .waitSeconds(0.200)
                 .build();
 
         TrajectorySequence parcarel = drive.trajectorySequenceBuilder(pixel2l.end())
@@ -151,15 +145,20 @@ public class Auto_short_blue extends LinearOpMode {
 
         while (!isStarted() && !isStopRequested()) {
 
-            double zoneright = detectionPipeline.getZoneLuminosity(85);
-            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(34)
-                                    ,detectionPipeline.getZoneLuminosity(35))
-                            ,detectionPipeline.getZoneLuminosity(24))
-                    ,detectionPipeline.getZoneLuminosity(25));
+            double zoneright = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(76)
+                                    ,detectionPipeline.getZoneLuminosity(86))
+                            ,detectionPipeline.getZoneLuminosity(77))
+                    ,detectionPipeline.getZoneLuminosity(87));
+            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(16)
+                                    ,detectionPipeline.getZoneLuminosity(26))
+                            ,detectionPipeline.getZoneLuminosity(17))
+                    ,detectionPipeline.getZoneLuminosity(27));
 
-            if (zoneright<zonemid && zoneright<135) zone = ZoneType.RIGHT;
-            else if (zonemid < zoneright && zonemid<100)zone = ZoneType.CENTER;
-            else zone = ZoneType.LEFT;
+            if(Math.abs(zoneright - zonemid) > 30){
+                if(zonemid<zoneright) zone =ZoneType.CENTER;
+                else if(zoneright<zonemid) zone = ZoneType.RIGHT;
+            }
+            else zone =ZoneType.LEFT;
 
             telemetry.addData("zone = ",zone.toString());
             telemetry.addData("luminosity zone right",zoneright);
@@ -186,33 +185,33 @@ public class Auto_short_blue extends LinearOpMode {
         switch(zoneFinal){
             case LEFT:
                 drive.followTrajectorySequence(pixel1l);
-                sleep(200);
+                sleep(50);
                 drive.followTrajectorySequence(pedruml);
-                sleep(200);
+                sleep(50);
                 drive.followTrajectorySequence(pixel2l);
-                sleep(200);
+                sleep(50);
                 robot.outake_open();
-                sleep(500);
+                sleep(100);
                 drive.followTrajectorySequence(parcarel);
                 break;
             case CENTER: drive.followTrajectorySequence(pixel1c);
-                sleep(200);
+                sleep(50);
                 drive.followTrajectorySequence(pedrumc);
-                sleep(200);
+                sleep(50);
                 drive.followTrajectorySequence(pixel2c);
-                sleep(200);
+                sleep(50);
                 robot.outake_open();
-                sleep(500);
+                sleep(100);
                 drive.followTrajectorySequence(parcarec);
                 break;
             case RIGHT: drive.followTrajectorySequence(pixel1r);
-                sleep(200);
+                sleep(50);
                 drive.followTrajectorySequence(pedrumr);
-                sleep(200);
+                sleep(50);
                 drive.followTrajectorySequence(pixel2r);
-                sleep(200);
+                sleep(50);
                 robot.outake_open();
-                sleep(500);
+                sleep(100);
                 drive.followTrajectorySequence(parcarer);
                 break;
         }

@@ -186,8 +186,8 @@ public class Auto_Short_Blue_Cicle extends LinearOpMode {
         TrajectorySequence ciclu1druml = drive.trajectorySequenceBuilder(pixel2l.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
                 .lineToLinearHeading(new Pose2d(45,26, Math.toRadians(0)))
-                .splineToSplineHeading(new Pose2d(37,56, Math.toRadians(0)), Math.toRadians(90))
-                .lineToSplineHeading(new Pose2d(-36,56, Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(37,57, Math.toRadians(0)), Math.toRadians(90))
+                .lineToSplineHeading(new Pose2d(-36,57, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(-47, 34, Math.toRadians(0)))
                 .build();
 
@@ -218,15 +218,20 @@ public class Auto_Short_Blue_Cicle extends LinearOpMode {
 
         while (!isStarted() && !isStopRequested()) {
 
-            double zoneright = detectionPipeline.getZoneLuminosity(85);
-            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(34)
-                                    ,detectionPipeline.getZoneLuminosity(35))
-                            ,detectionPipeline.getZoneLuminosity(24))
-                    ,detectionPipeline.getZoneLuminosity(25));
+            double zoneright = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(76)
+                                    ,detectionPipeline.getZoneLuminosity(86))
+                            ,detectionPipeline.getZoneLuminosity(77))
+                    ,detectionPipeline.getZoneLuminosity(87));
+            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(16)
+                                    ,detectionPipeline.getZoneLuminosity(26))
+                            ,detectionPipeline.getZoneLuminosity(17))
+                    ,detectionPipeline.getZoneLuminosity(27));
 
-            if (zoneright<zonemid && zoneright<112) zone = ZoneType.RIGHT;
-            else if (zonemid < zoneright && zonemid<80)zone = ZoneType.CENTER;
-            else zone = ZoneType.LEFT;
+            if(Math.abs(zoneright - zonemid) > 30){
+                if(zonemid<zoneright) zone =ZoneType.CENTER;
+                else if(zoneright<zonemid) zone =ZoneType.RIGHT;
+            }
+            else zone =ZoneType.LEFT;
 
             telemetry.addData("zone = ",zone.toString());
             telemetry.addData("luminosity zone right",zoneright);
