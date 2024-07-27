@@ -81,7 +81,7 @@ public class Auto_short_blue extends LinearOpMode {
         TrajectorySequence pixel2r = drive.trajectorySequenceBuilder(pedrumr.end())
                 .addTemporalMarker(0.2, ()->{robot.slider_up();})
                 .addTemporalMarker(0.3, ()->{robot.axonUp();})
-                .lineToLinearHeading(new Pose2d(50,26, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(50,25, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence parcarer = drive.trajectorySequenceBuilder(pixel2r.end())
@@ -130,14 +130,14 @@ public class Auto_short_blue extends LinearOpMode {
         TrajectorySequence pixel2l = drive.trajectorySequenceBuilder(pedruml.end())
                 .addTemporalMarker(0.3, ()->{robot.slider_up();})
                 .addTemporalMarker(0.4, ()->{robot.axonUp();})
-                .lineToLinearHeading(new Pose2d(52,38, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(52,36, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence parcarel = drive.trajectorySequenceBuilder(pixel2l.end())
                 .addTemporalMarker(0.5, ()->{robot.axonDown(); robot.slider_down();})
                 .lineToLinearHeading(new Pose2d(45,29, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(45,59, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(60,59, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(59,57, Math.toRadians(0)))
                 .build();
 
 
@@ -145,13 +145,13 @@ public class Auto_short_blue extends LinearOpMode {
 
         while (!isStarted() && !isStopRequested()) {
 
-            double zoneright = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(76)
+            double zoneright = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(86)
                                     ,detectionPipeline.getZoneLuminosity(86))
-                            ,detectionPipeline.getZoneLuminosity(77))
+                            ,detectionPipeline.getZoneLuminosity(87))
                     ,detectionPipeline.getZoneLuminosity(87));
-            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(16)
+            double zonemid = Math.min(Math.min(Math.min( detectionPipeline.getZoneLuminosity(26)
                                     ,detectionPipeline.getZoneLuminosity(26))
-                            ,detectionPipeline.getZoneLuminosity(17))
+                            ,detectionPipeline.getZoneLuminosity(27))
                     ,detectionPipeline.getZoneLuminosity(27));
 
             if(Math.abs(zoneright - zonemid) > 30){
