@@ -24,7 +24,7 @@ public class RobotUtils {
     public static double axon_up_pos = 0.38, axon_down_pos = 0.0;
     public static int slider_up1 = -900, slider_up2= 900, slider_down1 = 14, slider_down2 = -14;
 
-     public RobotUtils(HardwareMap hardwareMap){
+    public RobotUtils(HardwareMap hardwareMap){
       slider1 = hardwareMap.get(DcMotor.class, "slider1");
       slider2 = hardwareMap.get(DcMotor.class,"slider2");
 
